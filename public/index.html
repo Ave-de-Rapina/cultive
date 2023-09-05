@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CULTIVE HUB</title>
+
+<!-- C -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+<!-- include only the Firebase features as you need -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script>
+
+
+<script>
+ // REPLACE WITH YOUR web app's Firebase configuration
+ const firebaseConfig = {
+  apiKey: "AIzaSyAE8p9dd96ivYyHHhJk1Nd-VQIsA8fRIkI",
+  authDomain: "cultive-hub.firebaseapp.com",
+  databaseURL: "https://cultive-hub-default-rtdb.firebaseio.com",
+  projectId: "cultive-hub",
+  storageBucket: "cultive-hub.appspot.com",
+  messagingSenderId: "36987383898",
+  appId: "1:36987383898:web:e482ff51809c5d8842a863",
+  measurementId: "G-0Q70VWVTZZ"
+    
+  };
+
+  // Initialize firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Make auth and database references
+  const auth = firebase.auth();
+  const db = firebase.database();
+</script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <!--TOP BAR-->
+  <div class="topnav">
+    <h1>Painel de Controle <i class="fas fa-clipboard-list"></i></h1>
+  </div>
+
+  <!--AUTHENTICATION BAR (USER DETAILS/LOGOUT BUTTON)-->
+  <div id="authentication-bar" style="display: none;">
+    <p><span id="authentication-status">Usuário</span>
+       <span id="user-details">USEREMAIL</span>
+       <a href="/" id="logout-link">(Sair)</a>
+    </p>
+  </div>
+
+  <!--LOGIN FORM-->
+  <form id="login-form" style="display: none;">
+    <div class="form-elements-container">
+      <label for="input-email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Username" id="input-email" required>
+
+      <label for="input-password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="input-password" required>
+
+      <button type="submit" id="login-button">Login</button>
+      <p id="error-message" style="color:red;"></p>
+    </div>
+  </form>
+
+  <!--CONTENT (SENSOR READINGS)-->
+  <div class="content-sign-in" id="content-sign-in">
+    <div class="cards">       
+
+
+      <!--LED-->
+      <div class="card card-switch\">
+        <h4><i class="fas fa-lightbulb\"></i>ESTADO LED</h4>
+        <label class="switch"><input type="checkbox" onchange="toggleLed(this);" id="led">
+          <span class="slider"></span>
+        </label>
+      </div>            
+    
+  
+      <!--TEMPERATURE SENSOR 01-->
+      <div class="card">
+        <p><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temp. Sensor 01</p>
+        <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
+      </div>
+      <!--HUMIDITY SENSOR 02-->
+      <div class="card">
+        <p><i class="fas fa-tint" style="color:#00add6;"></i> Humid. Sensor 01</p>
+        <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
+      </div>
+      <!--PRESSURE-->
+      <div class="card">
+        <p><i class="fas fa-thermometer-half" style="color:#e47637;"></i> Temp. Sensor 02</p>
+        <p><span class="reading"><span id="pres"></span>&deg;C</span></p>
+      </div>
+      <!--HUMIDITY SENSOR 02-->
+      <div class="card">
+        <p><i class="fas fa-tint" style="color:#00add6;"></i> Humid. Sensor 02</p>
+        <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
+      </div>
+      <!--CARD DE ILUMINAÇÃO -->
+      <div class="card">
+        <h2>Controle de Iluminação</h2>
+        <label for="ligar">Ligar às:</label>
+        <input type="range" id="ligar" min="0" max="23" step="1">
+        <span id="ligar-value">0</span> h
+        <br>
+        <label for="desligar">Desligar às:</label>
+        <input type="range" id="desligar" min="0" max="23" step="1">
+        <span id="desligar-value">0</span> h
+        <br>
+        <label>Status do LED: <span id="led-indicator"></span></label>
+        <br>
+        <label>Horas ligado: <span id="horas-ligado">0</span></label>
+      </div> 
+    </div>
+     
+    <!--CHARTS-->
+  <!--  <div id="charts-div" style="display:none"> -->
+    <div id="charts-div" >
+      <!--SET NUMBER OF READINGS INPUT FIELD // DEFINIR O NUMERO DE LEITURAS NO CAMPO DE ENTRADA  --> 
+      <div>
+        <p> GRAFICOS</p>
+      </div>
+      <!--TEMPERATURE-CHART-->
+      <div class="cards">
+        <div class="card">
+          <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURA</p>
+          <div id="chart-temperature" class="chart-container"></div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURA</p>
+          <div id="chart-temperature" class="chart-container"></div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+  
+  <script src="./scripts/index.js"></script>
+  <script src="./scripts/auth.js"></script>
+  <script src="./scripts/charts-definitions.js"></script>
+ 
+  </body>
+</html>
