@@ -7,10 +7,12 @@ const authBarElement = document.querySelector("#authentication-bar");
 // Elements for sensor readings
 const tempElement = document.getElementById("temp");  // tempElement CONTEM O ELEMENTO COM id="temp" em HTML  
 const humElement = document.getElementById("hum");
-const presElement = document.getElementById("pres");
+const tempElement02 = document.getElementById("temp02");  // tempElement CONTEM O ELEMENTO COM id="temp" em HTML  
+const humElement02 = document.getElementById("hum02");
+
 //const ledElement = document.getElementById("led");
 
-//VARIAVEIS CILUMINAÇÃO
+//VARIAVEIS ILUMINAÇÃO
 const ligarInput = document.getElementById('ligar');
 const desligarInput = document.getElementById('desligar');
 const ledIndicator = document.getElementById('led-indicator');
@@ -36,16 +38,20 @@ const setupUI = (user) => {
     console.log(uid);   //MANDAR ESCREVER NO CONSOLE O UID do usuario
 
     // Database paths (with user UID)
-    var dbPathTemp = 'UsersDats/' + uid.toString() + '/temperature'; //VAI PASSAR O ENDEREÇO DO BANCO DE DADOS PARA dbPathTemp 
+    var dbPathTemp = 'UsersData/' + uid.toString() + '/temperature'; //VAI PASSAR O ENDEREÇO DO BANCO DE DADOS PARA dbPathTemp 
     var dbPathHum = 'UsersData/' + uid.toString() + '/humidity';    //uid.toString VAI CONVERTER O VALOR DE UID SEJA FLOAT, INT... PARA STRING
-    var dbPathPres = 'UsersData/' + uid.toString() + '/pressure';  //dbPathPres VAI ESTAR O ENDEREÇO DO BANCO DE DADOS UID com o uid do usuario
+    var dbPathTemp02 = 'UsersData/' + uid.toString() + '/temperature02'; 
+    var dbPathHum02 = 'UsersData/' + uid.toString() + '/humidity02';    
+    //var dbPathPres = 'UsersData/' + uid.toString() + '/pressure:';  //dbPathPres VAI ESTAR O ENDEREÇO DO BANCO DE DADOS UID com o uid do usuario
     dbPathOn = 'UsersData/' + uid.toString() + '/cultiveSoft';
     //dbPathLed = 'UsersData/' + uid.toString() + '/led';
 
     // Database references
     var dbRefTemp = firebase.database().ref().child(dbPathTemp);
     var dbRefHum = firebase.database().ref().child(dbPathHum);
-    var dbRefPres = firebase.database().ref().child(dbPathPres);
+    var dbRefTemp02 = firebase.database().ref().child(dbPathTemp02);
+    var dbRefHum02 = firebase.database().ref().child(dbPathHum02);
+    //var dbRefPres = firebase.database().ref().child(dbPathPres);
     // var dbPathLed = firebase.database().ref().child(dbPathLed);
     //var dbPathOn = firebase.database().ref().child(dbPathOn);
 
@@ -56,21 +62,20 @@ const setupUI = (user) => {
       var x = (new Date()).getTime(),
       y= parseFloat(snap.val().toFixed(2));
 
-         // y = parseFloat(this.responseText);
+      //y = parseFloat(this.responseText);
       //console.log(this.responseText);
+      
       if(chartT.series[0].data.length > 40) {
         chartT.series[0].addPoint([x, y], true, true, true);
       } else {
         chartT.series[0].addPoint([x, y], true, false, true);
       }
-    
+
     });
     dbRefHum.on('value', snap => {
       humElement.innerText = snap.val().toFixed(2);
     });
-    dbRefPres.on('value', snap => {
-      presElement.innerText = snap.val().toFixed(2);
-    });
+  
   // if user is logged out
   } else{
     // toggle UI elements
@@ -79,7 +84,29 @@ const setupUI = (user) => {
     userDetailsElement.style.display ='none';
     contentElement.style.display = 'none';
   }  
-}
+
+  dbRefTemp02.on('value', snap => {
+
+    tempElement02.innerText = snap.val().toFixed(2);
+    var w = (new Date()).getTime(),
+    z = parseFloat(snap.val().toFixed(2));
+
+    //y = parseFloat(this.responseText);
+    //console.log(this.responseText);
+    
+    if(chartT.series[0].data.length > 40) {
+      chartT.series[0].addPoint([w, z], true, true, true);
+    } else {
+      chartT.series[0].addPoint([w, z], true, false, true);
+    }
+
+  });
+  dbRefHum02.on('value', snap => {
+    humElement02.innerText = snap.val().toFixed(2);
+  });
+// if user is logged out
+} 
+
 
 
 ligarInput.addEventListener('input', updateLedStatus);
