@@ -1,4 +1,4 @@
-const ligarInput = document.getElementById('ligar');
+    const ligarInput = document.getElementById('ligar');
     const desligarInput = document.getElementById('desligar');
     const ledIndicator = document.getElementById('led-indicator');
     const horasLigadoDisplay = document.getElementById('horas-ligado');
@@ -34,3 +34,5 @@ const ligarInput = document.getElementById('ligar');
       });
 
     }
+
+    

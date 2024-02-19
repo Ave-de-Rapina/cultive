@@ -21,6 +21,7 @@ const ligarValueDisplay = document.getElementById('ligar-value');
 const desligarValueDisplay = document.getElementById('desligar-value');
 
 var dbPathOn;
+var dbPath01;
 //var dbPathLed;
 
 // MANAGE LOGIN/LOGOUT UI     -ESTUDAR
@@ -44,6 +45,7 @@ const setupUI = (user) => {
     var dbPathHum02 = 'UsersData/' + uid.toString() + '/humidity02';    
     //var dbPathPres = 'UsersData/' + uid.toString() + '/pressure:';  //dbPathPres VAI ESTAR O ENDEREÇO DO BANCO DE DADOS UID com o uid do usuario
     dbPathOn = 'UsersData/' + uid.toString() + '/cultiveSoft';
+    dbPath01 = 'UsersData/' + uid.toString() + '/temperaturaAjuste';
     //dbPathLed = 'UsersData/' + uid.toString() + '/led';
 
     // Database references
