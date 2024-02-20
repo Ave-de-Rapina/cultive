@@ -39,13 +39,13 @@ const setupUI = (user) => {
     console.log(uid);   //MANDAR ESCREVER NO CONSOLE O UID do usuario
 
     // Database paths (with user UID)
-    var dbPathTemp = 'UsersData/' + uid.toString() + '/temperature'; //VAI PASSAR O ENDEREÇO DO BANCO DE DADOS PARA dbPathTemp 
+    var dbPathTemp = 'UsersData/' + uid.toString()+ '/temperature'; //VAI PASSAR O ENDEREÇO DO BANCO DE DADOS PARA dbPathTemp 
     var dbPathHum = 'UsersData/' + uid.toString() + '/humidity';    //uid.toString VAI CONVERTER O VALOR DE UID SEJA FLOAT, INT... PARA STRING
     var dbPathTemp02 = 'UsersData/' + uid.toString() + '/temperature02'; 
     var dbPathHum02 = 'UsersData/' + uid.toString() + '/humidity02';    
     //var dbPathPres = 'UsersData/' + uid.toString() + '/pressure:';  //dbPathPres VAI ESTAR O ENDEREÇO DO BANCO DE DADOS UID com o uid do usuario
-    dbPathOn = 'UsersData/' + uid.toString() + '/cultiveSoft';
-    dbPath01 = 'UsersData/' + uid.toString() + '/temperaturaAjuste';
+    dbPathOn = 'UsersData/' + uid.toString() + '/ajusteIluminacao';
+    dbPath01 = 'UsersData/' + uid.toString() + '/ajusteTemperatura';
     //dbPathLed = 'UsersData/' + uid.toString() + '/led';
 
     // Database references
