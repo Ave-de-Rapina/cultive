@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Update temperature value in Firebase
         firebase.database().ref(dbPath01).set({
-            temperaturaAjuste: this.value
+            temperaturaAjuste: output.innerHTML
           });
     };
 })

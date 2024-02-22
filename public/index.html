@@ -77,54 +77,76 @@
     <div class="cards">       
 
 
-      <!--LED-->
+      <!--LED
       <div class="card card-switch\">
         <h4><i class="fas fa-lightbulb\"></i>ESTADO LED</h4>
         <label class="switch"><input type="checkbox" onchange="toggleLed(this);" id="led">
           <span class="slider"></span>
         </label>
-      </div>            
+      </div> 
+      -->           
     
   
-        <!-- TEMPERATURE SENSOR 01 -->
+    <!-- CARD TEMPERATURA -->
         <div class="card">
-          <p><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temp. Sensor 01</p>
+          <br>
+            <label> <span id="led-indicator"></span></label>
+          <br>
+          <h2><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temperatura:</h2>
           <p><span class="reading"><span id="temp">--</span> &deg;C</span></p>
-          <input type="range" min="16" max="40" value="16" class="temp-slider" id="temp-slider">
+          <p><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Ajuste:</p>
           <p><span class="reading01"><span id="tempAdjus">16</span> &deg;C</span></p>
+          <input type="range" min="16" max="40" value="16" class="temp-slider" id="temp-slider">
         </div>
    
-
-      <!--HUMIDITY SENSOR 01-->
+    <!--CARD UMIDADE-->
       <div class="card">
-        <p><i class="fas fa-tint" style="color:#00add6;"></i> Humid. Sensor 01</p>
+        <br>
+            <label> <span id="led-indicator"></span></label>
+        <br>
+        <h2><i class="fas fa-tint" style="color:#00add6;"></i> Umidade:</h2>
         <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
-      </div>
-      <!--TEMPERATURE SENSOR 02-->
-      <div class="card">
-        <p><i class="fas fa-thermometer-half02" style="color:#e72b3b;"></i> Temp. Sensor 02</p>
-        <p><span class="reading"><span id="temp02"></span> &deg;C</span></p>
-      </div>
-      <!--HUMIDITY SENSOR 02-->
-      <div class="card">
-        <p><i class="fas fa-tint02" style="color:#00add6;"></i> Humid. Sensor 02</p>
-        <p><span class="reading"><span id="hum02"></span> &percnt;</span></p>
+        <p><i class="fas fa-tint" style="color:#00add6;"></i> Ajuste:</p>
+        <p><span class="reading01"><span id="umidadeAdjust">16</span> %</span></p>
+        <input type="range" min="0" max="100" value="16" class="temp-slider" id="temp-slider-umidade">
       </div>
 
+    <!--CARD VENTILAÇÃO-->
+      <div class="card">
+        <br>
+          <label> <span id="led-indicator"></span></label>
+        <br>
+        <h2><i class="fas fa-thermometer-half02" style="color:#e72b3b;"></i>Ventilação:</h2>
+        <p><span class="reading01"><span>Liga: </span><span id="ventilacaoAdjustLiga"></span> min.</span></p>
+        <input type="range" min="0" max="60" value="16" class="temp-slider" id="temp-slider-ventilacao-liga">
+        <p><span class="reading01"><span>Desliga: </span><span id="ventilacaoAdjustDesliga"></span> min.</span></p>
+        <input type="range" min="0" max="60" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga">
+      </div>
+
+      <!--CARD IRRIGAÇÃO-->
+      <div class="card">
+        <br>
+            <label> <span id="led-indicator"></span></label>
+        <br>
+        <h2><i class="fas fa-tint02" style="color:#00add6;"></i>Irrigação:</h2>
+        <p><span class="reading01"><span>Liga: </span><span id="irrigacaoAdjust"></span> s</span></p>
+        <input type="range" min="0" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao">
+      </div>
+
+      
       <!--CARD DE ILUMINAÇÃO -->
       <div class="card">
-        <h2>Controle de Iluminação</h2>
-        <label for="ligar">Ligar às:</label>
+        <br>
+        <label> <span id="led-indicator"></span></label>
+      <br>
+        <h2>Iluminação:</h2>
+        <p>ligado: <span id="horas-ligado">0</span></p>
+        <p>
+        <span id="ligar-value">0</span>
+        </p>
         <input type="range" id="ligar" min="0" max="23" step="1">
-        <span id="ligar-value">0</span> h
-        <br>
-        <label for="desligar">Desligar às:</label>
+        <p><span>Liga: </span><span id="desligar-value">0</span><span> h</span></p>
         <input type="range" id="desligar" min="0" max="23" step="1">
-        <span id="desligar-value">0</span> h
-        <br>
-        <label>Status do LED: <span id="led-indicator"></span></label>
-        <br>
-        <label>Horas ligado: <span id="horas-ligado">0</span></label>
       </div> 
     </div>
      
@@ -142,13 +164,6 @@
           <div id="chart-temperature" class="chart-container"></div>
         </div>
       </div>
-
-      <div class="cards">
-        <div class="card">
-          <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURA</p>
-          <div id="chart-temperature" class="chart-container"></div>
-        </div>
-      </div>
   
     </div>
   </div>
@@ -158,5 +173,8 @@
   <script src="./scripts/auth.js"></script>
   <script src="./scripts/charts-definitions.js"></script>
   <script src="./scripts/temperatura.js"></script>
+  <script src="./scripts/umidade.js"></script>
+  <script src="./scripts/ventilacao.js"></script>
+  <script src="./scripts/Irrigacao.js"></script>
   </body>
 </html>

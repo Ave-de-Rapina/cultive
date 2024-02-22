@@ -22,6 +22,10 @@ const desligarValueDisplay = document.getElementById('desligar-value');
 
 var dbPathOn;
 var dbPath01;
+var dbPath02;
+var dbPath03;
+var dbPath04;
+var dbPath05;
 //var dbPathLed;
 
 // MANAGE LOGIN/LOGOUT UI     -ESTUDAR
@@ -46,6 +50,10 @@ const setupUI = (user) => {
     //var dbPathPres = 'UsersData/' + uid.toString() + '/pressure:';  //dbPathPres VAI ESTAR O ENDEREÇO DO BANCO DE DADOS UID com o uid do usuario
     dbPathOn = 'UsersData/' + uid.toString() + '/ajusteIluminacao';
     dbPath01 = 'UsersData/' + uid.toString() + '/ajusteTemperatura';
+    dbPath02 = 'UsersData/' + uid.toString() + '/ajusteUmidade';
+    dbPath03 = 'UsersData/' + uid.toString() + '/ajusteVentilacaoLiga';
+    dbPath04 = 'UsersData/' + uid.toString() + '/ajusteVentilacaoDesliga';
+    dbPath05 = 'UsersData/' + uid.toString() + '/ajusteIrrigacao';
     //dbPathLed = 'UsersData/' + uid.toString() + '/led';
 
     // Database references
