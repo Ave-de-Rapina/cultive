@@ -31,7 +31,7 @@ function createTemperatureChart() {
     },
     xAxis: {
       type: 'datetime',
-      dateTimeLabelFormats: { second: '%H:%M:%S' }
+      dateTimeLabelFormats: { minute: '%H:%M:%S' }
     },
     yAxis: {
       title: { 

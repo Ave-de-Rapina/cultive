@@ -1,38 +1,68 @@
-    const ligarInput = document.getElementById('ligar');
-    const desligarInput = document.getElementById('desligar');
-    const ledIndicator = document.getElementById('led-indicator');
-    const horasLigadoDisplay = document.getElementById('horas-ligado');
-    const ligarValueDisplay = document.getElementById('ligar-value');
-    const desligarValueDisplay = document.getElementById('desligar-value');
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      var slider = document.getElementById("ligar");
+      var output = document.getElementById("ligar-value");
+      output.innerHTML = slider.value;
 
-    ligarInput.addEventListener('input', updateLedStatus);
-    desligarInput.addEventListener('input', updateLedStatus);
-
-    function updateLedStatus() {
-      const ligarHora = parseInt(ligarInput.value);
-      const desligarHora = parseInt(desligarInput.value);
-
-      ligarValueDisplay.textContent = ligarHora;
-      desligarValueDisplay.textContent = desligarHora;
-      console.log(ligarHora);
-      console.log(desligarHora);
-
-      const currentHour = new Date().getHours();
-
-      if (currentHour >= ligarHora && currentHour < desligarHora) {
-        ledIndicator.style.backgroundColor = 'green';
-        const horasLigado = desligarHora - ligarHora;
-        horasLigadoDisplay.textContent = horasLigado;
-      } else {
-        ledIndicator.style.backgroundColor = 'red';
-        horasLigadoDisplay.textContent = '0';
-      }
       
-      firebase.database().ref(dbPathOn).set({
-        ligar: ligarHora,
-        desligar: desligarHora
-      });
+  
+      slider.oninput = function() {
+          output.innerHTML = this.value;
+          
+          
+          // Update temperature value in Firebase
+          firebase.database().ref(dbPathOn).set({
+              iluminacaoAjusteLiga: output.innerHTML
+            });
+      };
+  })
+  document.addEventListener("DOMContentLoaded", function() {
+    var slider = document.getElementById("ligarMin");
+    var output = document.getElementById("ligar-value-min");
+    output.innerHTML = slider.value;
 
-    }
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+        
+        
+        // Update temperature value in Firebase
+        firebase.database().ref(dbPath06).set({
+            iluminacaoAjusteLigaMin: output.innerHTML
+          });
+    };
+})
+  
+  document.addEventListener("DOMContentLoaded", function() {
+      var slider = document.getElementById("desligar");
+      var output = document.getElementById("desligar-value");
+      output.innerHTML = slider.value;
+  
+      slider.oninput = function() {
+          output.innerHTML = this.value;
+          
+          
+          // Update temperature value in Firebase
+          firebase.database().ref(dbPathOff).set({
+              iluminacaoAjusteDesliga: output.innerHTML
+            });
+      };
+  })
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var slider = document.getElementById("desligarMin");
+    var output = document.getElementById("desligar-value-min");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+        
+        
+        // Update temperature value in Firebase
+        firebase.database().ref(dbPath07).set({
+            iluminacaoAjusteDesligaMin: output.innerHTML
+          });
+    };
+})
+
 
     

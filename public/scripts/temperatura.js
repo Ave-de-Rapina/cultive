@@ -1,4 +1,7 @@
-//import { getDatabase, ref, set } from "firebase/database";
+
+
+
+
 
 
 
@@ -9,8 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     slider.oninput = function() {
         output.innerHTML = this.value;
-        
-        
+    
         // Update temperature value in Firebase
         firebase.database().ref(dbPath01).set({
             temperaturaAjuste: output.innerHTML
@@ -19,11 +21,3 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 
-/*
-function writeUserData(uid, temperaturaAjuste) {
-    const dbPath01 = getDatabase();
-    set(ref(dbPath01, 'UsersData/' + uid.toString() + '/temperaturaAjuste'), {
-        temperaturaAjuste: tempAdjust
-    });
-  }
-  */
