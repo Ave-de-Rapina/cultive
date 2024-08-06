@@ -5,23 +5,15 @@ html {
 }
 
 h1{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 h2{
-    font-size: 1.3rem;
-}
-
-h3 {
-    font-size: 2rem;
-}
-
-h4{
-    font-size: 1.3rem;
+    font-size: 1.2em;
 }
 
 p {
-    font-size: 22px;
+    font-size: 1.1rem;
     color: rgb(0, 0, 0);
 }
 
@@ -130,10 +122,13 @@ body {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: #0ff;
+    background: rgb(43, 255, 0);
     border: 2px solid #1b1b1b;
     cursor: pointer;
+    border-radius: 6px; /* Torna a borda arredondada */
+     /* Adiciona uma sombra para garantir que a borda seja visível */
 }
+
 .temp-slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
@@ -189,7 +184,7 @@ input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform
 
   .led {
     display: inline-block;
-    width: 200px;
+    width: 85%;
     height: 15px;
     border-radius: 7px;
     background-color: gray; /* Cor padrão */
