@@ -817,3 +817,4 @@ setInterval(function ( ) {
         chartT.series[0].addPoint([x, y], true, false, true);
       }
 }, 1000 ) ;*/
+
