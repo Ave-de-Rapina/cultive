@@ -28,7 +28,7 @@ body {
 }
 
 .topnav {
-    overflow: hidden;
+    //overflow: hidden;
     background-color:  #414b3b;
     color: rgb(3, 3, 3);
     font-size: 0.5rem;
@@ -38,15 +38,14 @@ body {
     border-radius: 10px;
     display: flex;
     align-items: center; /* Centraliza verticalmente os itens */
+    justify-content: center; /* Centraliza horizontalmente os itens */
 }
 
 /* Estilos para a logo */
 .topnav .logo {
-    max-height: 100%; /* Garante que a logo não exceda a altura da navegação superior */
-    height: 100%; /* Ajusta a altura da logo para se adequar à navegação superior */
-    width: 100%; /* Mantém a proporção da imagem */
-    
+    width: 75%; /* Mantém a proporção da imagem */
 }
+
 
 #authentication-bar{
     background-color: #414b3b;
