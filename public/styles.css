@@ -31,17 +31,21 @@ body {
     overflow: hidden;
     background-color:  #414b3b;
     color: rgb(3, 3, 3);
-    font-size: 1rem;
+    font-size: 0.5rem;
     padding: 0px;
     margin: 10px;
     background-color: #fff9f3;
     border-radius: 10px;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente os itens */
 }
 
-.logo {
-    margin: 0px;
-    border-radius: 10px;
- 
+/* Estilos para a logo */
+.topnav .logo {
+    max-height: 100%; /* Garante que a logo não exceda a altura da navegação superior */
+    height: 100%; /* Ajusta a altura da logo para se adequar à navegação superior */
+    width: 100%; /* Mantém a proporção da imagem */
+    
 }
 
 #authentication-bar{
