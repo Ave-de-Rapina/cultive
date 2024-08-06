@@ -28,7 +28,7 @@ body {
 }
 
 .topnav {
-    //overflow: hidden;
+    overflow: hidden;
     background-color:  #414b3b;
     color: rgb(3, 3, 3);
     font-size: 0.5rem;
@@ -43,7 +43,7 @@ body {
 
 /* Estilos para a logo */
 .topnav .logo {
-    width: 75%; /* Mantém a proporção da imagem */
+    width: 80%; /* Mantém a proporção da imagem */
 }
 
 
