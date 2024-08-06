@@ -4,8 +4,30 @@ html {
     text-align: center;
 }
 
+h1{
+    font-size: 2rem;
+}
+
+h2{
+    font-size: 1.3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+h4{
+    font-size: 1.3rem;
+}
+
 p {
-    font-size: 1.2rem;
+    font-size: 22px;
+    color: rgb(0, 0, 0);
+}
+
+p1 {
+    font-size: 1.7rem;
+    color: rgb(0, 0, 0);
 }
 
 body {
@@ -65,14 +87,15 @@ body {
     padding: 0px;
 }
 
+
 .card {
     background-color: #fff9f3;
-    box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
+    box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
     padding: 5%;
     margin: 10px;
     border-radius: 10px;
+    position: relative;
 }
-
 .cards {
     max-width: 800px;
     margin: 0 auto;
@@ -80,9 +103,43 @@ body {
     grid-gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
-
-.reading {
-    font-size: 1.2rem;
+.lock-icon {
+    position: absolute;
+    padding: 2%;
+    top: 10px;
+    right: 10px;
+    font-size: 1.7rem;
+    color: #e8b600;
+    cursor: pointer;
+}
+.temp-slider[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.temp-slider {
+    width: 100%;
+    margin: 20px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    background: #333;
+    outline: none;
+}
+.temp-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #0ff;
+    border: 2px solid #1b1b1b;
+    cursor: pointer;
+}
+.temp-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: rgb(43, 255, 0);
+    border: 2px solid #1b1b1b;
+    cursor: pointer;
 }
 
 button {
@@ -132,9 +189,9 @@ input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform
 
   .led {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    width: 200px;
+    height: 15px;
+    border-radius: 7px;
     background-color: gray; /* Cor padrão */
 }
 .led.on {

@@ -24,8 +24,18 @@ const ajusIluminDesligaMinElement = document.getElementById("desligar-value-min"
 const ajusIluminDesligaMinInputElement = document.getElementById("desligarMin");
 const ajusTemperaturaElement = document.getElementById("tempAdjus");
 const ajusTemperaturaInputElement = document.getElementById("temp-slider");
+const ajusTemperaturaHistereseElement = document.getElementById("tempAdjusHisterese");
+const ajusTemperaturaHistereseInputElement = document.getElementById("temp-slider-temperatura-histerese");
+const ajusTemperaturaOffsetElement = document.getElementById("tempAdjusOffset");
+const ajusTemperaturaOffsetInputElement = document.getElementById("temp-slider-temperatura-offset");
+
 const ajusUmidadeElement = document.getElementById("umidadeAdjust");
 const ajusUmidadeInputElement = document.getElementById("temp-slider-umidade");
+const ajusUmidadeHistereseElement = document.getElementById("umidadeHistereseAdjust");
+const ajusUmidadeHistereseInputElement = document.getElementById("temp-slider-umidade-histerese");
+const ajusUmidadeOffsetElement = document.getElementById("umidadeOffsetAdjus");
+const ajusUmidadeOffsetInputElement = document.getElementById("temp-slider-umidade-offset");
+
 const ajusVentilacaoLigaElement = document.getElementById("ventilacaoAdjustLiga");
 const ajusVentilacaoLigaInputElement = document.getElementById("temp-slider-ventilacao-liga");
 const ajusVentilacaoDesligaElement = document.getElementById("ventilacaoAdjustDesliga");
@@ -70,7 +80,10 @@ var dbPath09;
 var dbPath10;
 var dbPath11;
 var dbPath12;
-
+var dbPath13;
+var dbPath14;
+var dbPath15;
+var dbPath16;
 //var dbPathLed;
 
 // MANAGE LOGIN/LOGOUT UI     -ESTUDAR
@@ -112,6 +125,10 @@ const setupUI = (user) => {
     dbPath10 = 'UsersData/' + uid.toString() + '/ajusteIrrigacao02';
     dbPath11 = 'UsersData/' + uid.toString() + '/ajusteIrrigacaoHora03';
     dbPath12 = 'UsersData/' + uid.toString() + '/ajusteIrrigacao03';
+    dbPath13 = 'UsersData/' + uid.toString() + '/ajusteTemperaturaHisterese';
+    dbPath14 = 'UsersData/' + uid.toString() + '/ajusteTemperaturaOffset';
+    dbPath15 = 'UsersData/' + uid.toString() + '/ajusteUmidadeHisterese';
+    dbPath16 = 'UsersData/' + uid.toString() + '/ajusteUmidadeOffset';
     //dbPathLed = 'UsersData/' + uid.toString() + '/led';
 
     // Database references
@@ -138,6 +155,10 @@ const setupUI = (user) => {
     var dbRefdbPath10 = firebase.database().ref().child(dbPath10);
     var dbRefdbPath11 = firebase.database().ref().child(dbPath11);
     var dbRefdbPath12 = firebase.database().ref().child(dbPath12);
+    var dbRefdbPath13 = firebase.database().ref().child(dbPath13);
+    var dbRefdbPath14 = firebase.database().ref().child(dbPath14);
+    var dbRefdbPath15 = firebase.database().ref().child(dbPath15);
+    var dbRefdbPath16 = firebase.database().ref().child(dbPath16);
     
     //var dbRefPres = firebase.database().ref().child(dbPathPres);
     // var dbPathLed = firebase.database().ref().child(dbPathLed);
@@ -273,6 +294,60 @@ ajusTemperaturaInputElement.addEventListener('input', function() {
   dbRefdbPath01.set({ temperaturaAjuste: novoValor });
 });
 
+//------------------------------------TEMPERATURA HISTERESE-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoTemperaturaHisterese(valor) {
+  ajusTemperaturaHistereseElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputTemperaturaHisterese(valor) {
+  ajusTemperaturaHistereseInputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath13.on('value', snap => {
+  var valor = snap.val().temperaturaHistereseAjuste;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoTemperaturaHisterese(valor);
+  // Atualizar o valor do input
+  atualizarValorInputTemperaturaHisterese(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusTemperaturaHistereseInputElement.addEventListener('input', function() {
+  var novoValor = ajusTemperaturaHistereseInputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath13.set({ temperaturaHistereseAjuste: novoValor });
+});
+
+//------------------------------------TEMPERATURA OFFSET-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoTemperaturaOffset(valor) {
+  ajusTemperaturaOffsetElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputTemperaturaOffset(valor) {
+  ajusTemperaturaOffsetInputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath14.on('value', snap => {
+  var valor = snap.val().temperaturaOffsetAjuste;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoTemperaturaOffset(valor);
+  // Atualizar o valor do input
+  atualizarValorInputTemperaturaOffset(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusTemperaturaOffsetInputElement.addEventListener('input', function() {
+  var novoValor = ajusTemperaturaOffsetInputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath14.set({ temperaturaOffsetAjuste: novoValor });
+});
+
 //------------------------------------UMIDADE-------------------------------------------
 // Função para atualizar o valor do elemento span
 function atualizarValorElementoUmidade(valor) {
@@ -299,6 +374,61 @@ ajusUmidadeInputElement.addEventListener('input', function() {
   // Atualizar o valor no banco de dados quando o input range é alterado
   dbRefdbPath02.set({ umidadeAjuste: novoValor });
 });
+
+//------------------------------------UMIDADE HISTERESE-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoUmidadeHisterese(valor) {
+  ajusUmidadeHistereseElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputUmidadeHisterese(valor) {
+  ajusUmidadeHistereseInputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath15.on('value', snap => {
+  var valor = snap.val().umidadeHistereseAjuste;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoUmidadeHisterese(valor);
+  // Atualizar o valor do input
+  atualizarValorInputUmidadeHisterese(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusUmidadeHistereseInputElement.addEventListener('input', function() {
+  var novoValor = ajusUmidadeHistereseInputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath15.set({ umidadeHistereseAjuste: novoValor });
+});
+
+//------------------------------------UMIDADE OFFSET-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoUmidadeOffset(valor) {
+  ajusUmidadeOffsetElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputUmidadeOffset(valor) {
+  ajusUmidadeOffsetInputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath16.on('value', snap => {
+  var valor = snap.val().umidadeOffsetAjuste;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoUmidadeOffset(valor);
+  // Atualizar o valor do input
+  atualizarValorInputUmidadeOffset(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusUmidadeOffsetInputElement.addEventListener('input', function() {
+  var novoValor = ajusUmidadeOffsetInputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath16.set({ umidadeOffsetAjuste: novoValor });
+});
+
 //------------------------------------VENTILACAO LIGA-------------------------------------------
 // Função para atualizar o valor do elemento span
 function atualizarValorElementoVentilacaoLiga(valor) {
@@ -514,6 +644,23 @@ ajusIrrigacao03InputElement.addEventListener('input', function() {
   // Atualizar o valor no banco de dados quando o input range é alterado
   dbRefdbPath12.set({ irrigacaoAjuste03: novoValor });
 });
+
+//---------------------------LOGICA CADEADO------------------------------------------------------
+
+document.querySelectorAll('.lock-icon').forEach(lock => {
+  lock.addEventListener('click', function() {
+      const card = this.parentElement;
+      const sliders = card.querySelectorAll('.temp-slider');
+      const isLocked = this.classList.contains('fa-lock');
+      sliders.forEach(slider => {
+          slider.disabled = !isLocked;
+      });
+      this.classList.toggle('fa-lock', !isLocked);
+      this.classList.toggle('fa-lock-open', isLocked);
+  });
+});
+
+
 
 
 

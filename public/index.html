@@ -61,10 +61,10 @@
   <form id="login-form" style="display: none;">
     <div class="form-elements-container">
       <label for="input-email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Username" id="input-email" required>
+      <input type="text" placeholder="Insira seu e-mail" id="input-email" required>
 
-      <label for="input-password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="input-password" required>
+      <label for="input-password"><b>Senha</b></label>
+      <input type="password" placeholder="Digite sua Senha" id="input-password" required>
 
       <button type="submit" id="login-button">Login</button>
       <p id="error-message" style="color:red;"></p>
@@ -81,95 +81,108 @@
 
   <!--CONTENT (SENSOR READINGS)-->
   <div class="content-sign-in" id="content-sign-in">
-    <div class="cards"> 
-         
-
-
-      <!--LED
-      <div class="card card-switch\">
-        <h4><i class="fas fa-lightbulb\"></i>ESTADO LED</h4>
-        <label class="switch"><input type="checkbox" onchange="toggleLed(this);" id="led">
-          <span class="slider"></span>
-        </label>
-      </div> 
-      -->           
-        <!--CARD DE ILUMINAÇÃO -->
-        <div class="card">
+    <div class="cards">
+      <!-- CARD DE ILUMINAÇÃO -->
+      <div class="card">
+          <i class="fa-solid fa-lock lock-icon" id="lock-iluminacao"></i>
           <br>
-            <label><span class="led" id="led-indicator-iluminacao"></span></label>
+          <label><span class="led" id="led-indicator-iluminacao"></span></label>
           </br>
-          <h2><i class="fa-solid fa-sun" style="color: #ffc600;"></i> Iluminação</h2>
-          
-          <p>Horas Ativa: <span id="horas-ligado">0</span></p>
-          <p><span><i class="fa-solid fa-plug-circle-bolt"></i> On    </span><span id="ligar-value"></span>:<span id="ligar-value-min"></span><span> h</span></p>
-          <div>hora</div><input type="range" id="ligar" min="0" max="23" step="1">
-          <div>minuto</div><input type="range" id="ligarMin" min="00" max="59" step="0">
-          <p><span><i class="fa-solid fa-plug-circle-xmark"></i> Off    </span><span id="desligar-value"></span>:<span id="desligar-value-min"></span><span> h</span></p>
-          <div>hora</div><input type="range" id="desligar" min="0" max="23" step="1">
-          <div>minuto</div><input type="range" id="desligarMin" min="00" max="59" step="0">
-        </div> 
-  
-        <!-- CARD TEMPERATURA -->
-        <div class="card">
+          <h1><i class="fa-solid fa-sun" style="color: #ffc600;"></i> Iluminação</h1>
+          <p>Ligado: <span id="horas-ligado">0</span></p>
+          <p1><span><i class="fa-solid fa-plug-circle-bolt"></i></span></p1>
+          <p>
+              <label for="ligar">Hora: </label><span id="ligar-value"></span>
+              <input class="temp-slider" type="range" id="ligar" min="0" max="23" step="1" disabled>
+          </p>
+          <p>
+              <label for="ligarMin">Minuto: </label><span id="ligar-value-min"></span>
+              <input class="temp-slider" type="range" id="ligarMin" min="0" max="59" step="1" disabled>
+          </p>
+          <p1><span><i class="fa-solid fa-plug-circle-xmark"></i></span></p1>
+          <p>
+              <label for="desligar">Hora: </label><span id="desligar-value"></span>
+              <input class="temp-slider" type="range" id="desligar" min="0" max="23" step="1" disabled>
+          </p>
+          <p>
+              <label for="desligarMin">Minuto: </label><span id="desligar-value-min"></span>
+              <input class="temp-slider" type="range" id="desligarMin" min="0" max="59" step="1" disabled>
+          </p>
+      </div>
+
+      <!-- CARD TEMPERATURA -->
+      <div class="card">
+          <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
           <br>
-            <label> <span class="led" id="led-indicator-temperatura"></span></label>
+              <label> <span class="led" id="led-indicator-temperatura"></span></label>
           <br>
-          <h2><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temperatura</h2>
-          <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
-          <p><i class="fa-solid fa-wrench"></i> Ajuste</p>
-          <p><span class="reading01"><span id="tempAdjus"></span> &deg;C</span></p>
-          <input type="range" min="16" max="40" class="temp-slider" id="temp-slider">
-        </div>
-   
-      <!--CARD UMIDADE-->
-      <div class="card">
-        <br>
-          <label> <span class="led" id="led-indicator-umidade"></span></label>
-        <br>
-        <h2 ><i class="fas fa-tint" style="color:#00add6;"></i> Umidade</h2>
-        <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
-        <p><i class="fa-solid fa-wrench"></i> Ajuste</p>
-        <p><span class="reading01"><span id="umidadeAdjust"></span> %</span></p>
-        <input type="range" min="0" max="100"  class="temp-slider" id="temp-slider-umidade">
+          <h1><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temperatura</h1>
+          <p><span class="reading">Atual: <span id="temp"></span> &deg;C</span></p>
+          <p1><i class="fa-solid fa-wrench"></i></p1>
+          <p><span class="reading01">Setpoint: <span id="tempAdjus"></span> &deg;C</span></p>
+          <input type="range" min="16" max="40" class="temp-slider" id="temp-slider" disabled>          
+          <p><span class="reading01">Histerese: <span id="tempAdjusHisterese"></span> &deg;C</span></p>
+          <input type="range" min="0" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-histerese" disabled>
+          <p><span class="reading01">Offset: <span id="tempAdjusOffset"></span> &deg;C</span></p>
+          <input type="range" min="-3" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-offset" disabled>
       </div>
 
-      <!--CARD VENTILAÇÃO-->
+      <!-- CARD UMIDADE -->
       <div class="card">
-        <br>
-          <label> <span class="led" id="led-indicator-ventilacao"></span></label>
-        <br>
-        <h2><i class="fa-solid fa-wind" style="color: #603ffc;"></i> Ventilação</h2>
-        <p><span class="reading01"><span><i class="fa-solid fa-plug-circle-bolt"></i> On: </span><span id="ventilacaoAdjustLiga"></span> min.</span></p>
-        <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-liga">
-        <p><span class="reading01"><span><i class="fa-solid fa-plug-circle-xmark"></i> Off: </span><span id="ventilacaoAdjustDesliga"></span> min.</span></p>
-        <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga">
+          <i class="fa-solid fa-lock lock-icon" id="lock-umidade"></i>
+          <br>
+              <label> <span class="led" id="led-indicator-umidade"></span></label>
+          <br/>
+          <h1><i class="fas fa-tint" style="color:#00add6;"></i> Umidade</h1>
+          <p><span class="reading">Atual: <span id="hum"></span> &percnt;</span></p>
+          <p1><i class="fa-solid fa-wrench"></i> </p1>
+          <p><span class="reading01">Setpoint: <span id="umidadeAdjust"></span> %</span></p>
+          <input type="range" min="0" max="100" class="temp-slider" id="temp-slider-umidade" disabled>
+          <p><span class="reading01">Histerese: <span id="umidadeHistereseAdjus"></span> &deg;C</span></p>
+          <input type="range" min="0" max="3" step="0.1" class="temp-slider" id="temp-slider-umidade-histerese" disabled>
+          <p><span class="reading01">Offset: <span id="umidadeOffsetAdjus"></span> &deg;C</span></p>
+          <input type="range" min="-3" max="3" step="0.1" class="temp-slider" id="temp-slider-umidade-offset" disabled>
       </div>
 
-      <!--CARD IRRIGAÇÃO-->
+      <!-- CARD VENTILAÇÃO -->
       <div class="card">
-        <br>
-          <label> <span class="led" id="led-indicator-irrigacao"></span></label>
-        <br>
-        <h2><i class="fa-solid fa-cloud-showers-heavy" style="color: #6d8dc9;"></i> Irrigação</h2>
-        <h4>Aconamento 01</h4>
-        <p><span><i class="fa-solid fa-plug-circle-bolt"></i> On  </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
-        <input type="range" id="ligar-irrigacao" min="0" max="23" step="1">
-        <p><span class="reading01"><span><i class="fa-solid fa-plug-circle-bolt"></i> On: </span><span id="irrigacaoAdjust"></span> s</span></p>
-        <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao">
-
-        <h4>Aconamento 02</h4>
-        <p><span><i class="fa-solid fa-plug-circle-bolt"></i> On  </span><span id="ligar-value-irrigacao02"></span><span> h</span></p>
-        <input type="range" id="ligar-irrigacao02" min="0" max="23" step="1">
-        <p><span class="reading01"><span><i class="fa-solid fa-plug-circle-bolt"></i> On: </span><span id="irrigacaoAdjust02"></span> s</span></p>
-        <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao02">
-
-        <h4>Aconamento 03</h4>
-        <p><span><i class="fa-solid fa-plug-circle-bolt"></i> On  </span><span id="ligar-value-irrigacao03"></span><span> h</span></p>
-        <input type="range" id="ligar-irrigacao03" min="0" max="23" step="1">
-        <p><span class="reading01"><span><i class="fa-solid fa-plug-circle-bolt"></i> On: </span><span id="irrigacaoAdjust03"></span> s</span></p>
-        <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao03">
+          <i class="fa-solid fa-lock lock-icon" id="lock-ventilacao"></i>
+          <br>
+              <label> <span class="led" id="led-indicator-ventilacao"></span></label>
+          <br>
+          <h1><i class="fa-solid fa-wind" style="color: #603ffc;"></i> Ventilação</h1>
+          <p1><i class="fa-solid fa-plug-circle-bolt"></i></p1>
+          <p><span class="reading01"><span> On: </span><span id="ventilacaoAdjustLiga"></span> min.</span></p>
+          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-liga" disabled>
+          <p1><i class="fa-solid fa-plug-circle-xmark"></i></p1>
+          <p><span class="reading01"><span> Off: </span><span id="ventilacaoAdjustDesliga"></span> min.</span></p>
+          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
       </div>
-    </div>
+
+      <!-- CARD IRRIGAÇÃO -->
+      <div class="card">
+          <i class="fa-solid fa-lock lock-icon" id="lock-irrigacao"></i>
+          <br>
+              <label> <span class="led" id="led-indicator-irrigacao"></span></label>
+          <br>
+          <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #6d8dc9;"></i> Irrigação</h1>
+          <h4>Acionamento 01</h4>
+          <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
+          <input class="temp-slider" type="range" id="ligar-irrigacao" min="0" max="23" step="1" disabled>
+          <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust"></span> s</span></p>
+          <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao" disabled>
+          <h4>Acionamento 02</h4>
+          <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1>  </span><span id="ligar-value-irrigacao02"></span><span> h</span></p>
+          <input class="temp-slider" type="range" id="ligar-irrigacao02" min="0" max="23" step="1" disabled>
+          <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust02"></span> s</span></p>
+          <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao02" disabled>
+          <h4>Acionamento 03</h4>
+          <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao03"></span><span> h</span></p>
+          <input class="temp-slider" type="range" id="ligar-irrigacao03" min="0" max="23" step="1" disabled>
+          <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust03"></span> s</span></p>
+          <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao03" disabled>
+      </div>
+  </div>
      
     <!--CHARTS-->
   <!--  <div id="charts-div" style="display:none"> -->
