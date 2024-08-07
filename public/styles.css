@@ -62,7 +62,7 @@ body {
 
 #user-details{
     color: rgb(151, 151, 151);
-    font-size: 20px;
+    font-size: 15px;
     padding: 0px;
     margin: 0px;
 
@@ -72,9 +72,8 @@ body {
     width: 100%;
     font-size: 30px;
     color:#000000;
-
-  
 }
+
 
 .content {
     padding: 0px;
@@ -96,6 +95,54 @@ body {
     grid-gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
+/* Estilo para o card de notificações */
+.notifications-card {
+    background-color: #fff9f3;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+    padding: 10px;
+    margin: 20px 20;
+    max-width: 600px;
+}
+
+.notifications-card h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #000000;
+    text-align: left;
+}
+
+.notification {
+    font-size: 12px;
+    color: #555;
+    text-align: left;
+    padding: 5px;
+    margin: 0;
+    border-radius: 4px;
+    box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+}
+
+.notification:nth-child(odd) {
+    background-color: #e0ffe0; /* Fundo verde claro para mensagens ímpares */
+}
+
+.notification:nth-child(even):not(.notification:nth-child(3)) {
+    background-color: #e0ffe0; /* Fundo verde claro para mensagens pares, exceto a terceira */
+}
+
+.notification:nth-child(3) {
+    background-color: #ffe0e0; /* Fundo vermelho claro para a terceira mensagem */
+    animation: blink 1s infinite; /* Animação de piscar */
+}
+
+@keyframes blink {
+    0% { background-color: #ffe0e0; }
+    50% { background-color: #fff; }
+    100% { background-color: #ffe0e0; }
+}
+
+
 .lock-icon {
     position: absolute;
     padding: 2%;

@@ -74,17 +74,30 @@
     </div>
   </form>
 
-   <!--AUTHENTICATION BAR (USER DETAILS/LOGOUT BUTTON)-->
-   <div id="authentication-bar" style="display: none;">
-    <p><span id="authentication-status"><i class="fa-solid fa-user"></i> Usuário</span>
-       <span id="user-details">USEREMAIL</span>
-       <a href="/" id="logout-link"><i class="fa-solid fa-tent-arrow-turn-left"></i></a>
-    </p>
+  <!--AUTHENTICATION BAR (USER DETAILS/LOGOUT BUTTON)-->
+  <div id="authentication-bar" style="display: none;">
+    <span id="authentication-status"><i class="fa-solid fa-user"></i> Usuário</span>
+    <span id="user-details">USEREMAIL</span>
+    <a href="/" id="logout-link"><i class="fa-solid fa-tent-arrow-turn-left"></i></a>
   </div>
 
   <!--CONTENT (SENSOR READINGS)-->
   <div class="content-sign-in" id="content-sign-in">
     <div class="cards">
+
+      <!-- CARD NOTIFICAÇÃO -->
+  <div class="card notifications-card">
+    <h2><i class="fa-solid fa-bell"></i> Notificações:</h2>
+    <p class="notification">18:43 - Varedura do sistema completa</p>
+    <p class="notification">22:30 - Houve uma queda de energia</p>
+    <p class="notification">22:31 - Sistema reiniciado com sucesso</p>
+    <p class="notification">22:31 - Dados recuperados com sucesso</p>
+    <p class="notification">23:05 - Alterado tempo de acionamento ventilação de 5 para 12 minutos</p>
+    <p class="notification">06:15 - Iluminação acionada</p>
+    <p class="notification">07:00 - Iniciado sistema de irrigação</p>
+    <p class="notification">07:05 - Irrigação concluida</p>
+</div>
+
       <!-- CARD DE ILUMINAÇÃO -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-iluminacao"></i>
@@ -116,20 +129,20 @@
 
       <!-- CARD TEMPERATURA -->
       <div class="card">
-          <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
-          <h1><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temperatura <i class="fas fa-thermometer-half" style="color:#e72b3b;"></i></h1>
-          
-              <label> <span class="led" id="led-indicator-temperatura"></span></label>
-          
-          <h2><span class="reading">Atual: <span id="temp"></span> &deg;C</span></h2>
-          <p1><i class="fa-solid fa-wrench"></i></p1>
-          <p><span class="reading01">Setpoint: <span id="tempAdjus"></span> &deg;C</span></p>
-          <input type="range" min="16" max="40" class="temp-slider" id="temp-slider" disabled>          
-          <p><span class="reading01">Histerese: <span id="tempAdjusHisterese"></span> &deg;C</span></p>
-          <input type="range" min="0" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-histerese" disabled>
-          <p><span class="reading01">Offset: <span id="tempAdjusOffset"></span> &deg;C</span></p>
-          <input type="range" min="-3" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-offset" disabled>
-      </div>
+        <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
+        <h1><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temperatura <i class="fas fa-thermometer-half" style="color:#e72b3b;"></i></h1>
+        
+            <label> <span class="led" id="led-indicator-temperatura"></span></label>
+        
+        <h2><span class="reading">Atual: <span id="temp"></span> &deg;C</span></h2>
+        <p1><i class="fa-solid fa-wrench"></i></p1>
+        <p><span class="reading01">Setpoint: <span id="tempAdjus"></span> &deg;C</span></p>
+        <input type="range" min="16" max="40" class="temp-slider" id="temp-slider" disabled>          
+        <p><span class="reading01">Histerese: <span id="tempAdjusHisterese"></span> &deg;C</span></p>
+        <input type="range" min="0" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-histerese" disabled>
+        <p><span class="reading01">Offset: <span id="tempAdjusOffset"></span> &deg;C</span></p>
+        <input type="range" min="-3" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-offset" disabled>
+    </div>
 
       <!-- CARD UMIDADE -->
       <div class="card">
