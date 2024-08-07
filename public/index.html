@@ -140,10 +140,10 @@
           <p1><i class="fa-solid fa-wrench"></i> </p1>
           <p><span class="reading01">Setpoint: <span id="umidadeAdjust"></span> %</span></p>
           <input type="range" min="0" max="100" class="temp-slider" id="temp-slider-umidade" disabled>
-          <p><span class="reading01">Histerese: <span id="umidadeHistereseAdjus"></span> &deg;C</span></p>
-          <input type="range" min="0" max="3" step="0.1" class="temp-slider" id="temp-slider-umidade-histerese" disabled>
-          <p><span class="reading01">Offset: <span id="umidadeOffsetAdjus"></span> &deg;C</span></p>
-          <input type="range" min="-3" max="3" step="0.1" class="temp-slider" id="temp-slider-umidade-offset" disabled>
+          <p><span class="reading01">Histerese: <span id="umidadeHistereseAdjus"></span> %</span></p>
+          <input type="range" min="0" max="15" step="1" class="temp-slider" id="temp-slider-umidade-histerese" disabled>
+          <p><span class="reading01">Offset: <span id="umidadeOffsetAdjus"></span> %</span></p>
+          <input type="range" min="-10" max="10" step="1" class="temp-slider" id="temp-slider-umidade-offset" disabled>
       </div>
 
       <!-- CARD VENTILAÇÃO -->
@@ -167,17 +167,17 @@
           <i class="fa-solid fa-lock lock-icon" id="lock-irrigacao"></i>
           <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #6d8dc9;"></i> Irrigação <i class="fa-solid fa-cloud-showers-heavy" style="color: #6d8dc9;"></i></h1>
               <label> <span class="led" id="led-indicator-irrigacao"></span></label>
-          <h4>Acionamento 01</h4>
+          <p>Acionamento 01</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao" min="0" max="23" step="1" disabled>
           <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust"></span> s</span></p>
           <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao" disabled>
-          <h4>Acionamento 02</h4>
+          <p>Acionamento 02</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1>  </span><span id="ligar-value-irrigacao02"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao02" min="0" max="23" step="1" disabled>
           <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust02"></span> s</span></p>
           <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao02" disabled>
-          <h4>Acionamento 03</h4>
+          <p>Acionamento 03</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao03"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao03" min="0" max="23" step="1" disabled>
           <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust03"></span> s</span></p>
@@ -201,6 +201,19 @@
       </div>
     </div>
   </div>
+
+    <!-- Rodapé -->
+    <footer>
+      <div class="footer-content">
+        <br>
+        <p2>Cultive Soft - Soluções para cultivo</p2>
+      </br>
+        <p2>Fone: (47) 98887-2282</p2>
+      </div>
+      <div class="footer-bottom">
+        <p2>&copy; 2024 Cultive Soft. Todos os direitos reservados.</p2>
+      </div>
+    </footer>
 
   <script src="https://kit.fontawesome.com/927f6e1d2c.js" crossorigin="anonymous"></script>
   <script src="./scripts/index.js"></script>
