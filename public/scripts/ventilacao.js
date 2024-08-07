@@ -29,3 +29,43 @@ document.addEventListener("DOMContentLoaded", function() {
           });
     };
 })
+
+//----------------------------ILUMINACAO LIGA--------------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+    const sliderLiga = document.getElementById('temp-slider-ventilacao-liga');
+    const sliderDesliga = document.getElementById('temp-slider-ventilacao-desliga');
+    const horasLigadoVentilacaoElement = document.getElementById('horas-ligado-ventilacao');
+    const ventilacaoAdjustLiga = document.getElementById('ventilacaoAdjustLiga');
+    const ventilacaoAdjustDesliga = document.getElementById('ventilacaoAdjustDesliga');
+
+    function updateCiclosPorDia() {
+        const tempoLiga = parseInt(sliderLiga.value, 10);
+        const tempoDesliga = parseInt(sliderDesliga.value, 10);
+
+        const tempoTotalCiclo = tempoLiga + tempoDesliga;
+
+        const ciclosPorDia = (1440 / tempoTotalCiclo).toFixed(2);
+
+        horasLigadoVentilacaoElement.textContent = ciclosPorDia;
+    }
+
+    function updateSliderValues() {
+        ventilacaoAdjustLiga.textContent = sliderLiga.value;
+        ventilacaoAdjustDesliga.textContent = sliderDesliga.value;
+    }
+
+    sliderLiga.addEventListener('input', () => {
+        updateSliderValues();
+        updateCiclosPorDia();
+    });
+
+    sliderDesliga.addEventListener('input', () => {
+        updateSliderValues();
+        updateCiclosPorDia();
+    });
+
+    // Initialize values
+    updateSliderValues();
+    updateCiclosPorDia();
+});

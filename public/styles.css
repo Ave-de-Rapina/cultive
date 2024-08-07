@@ -43,9 +43,8 @@ body {
 
 /* Estilos para a logo */
 .topnav .logo {
-    width: 100%; /* Mantém a proporção da imagem */
+    width: 85%; /* Mantém a proporção da imagem */
 }
-
 
 #authentication-bar{
     background-color: #414b3b;
@@ -53,7 +52,6 @@ body {
     padding-bottom: 6px;
     margin: 10px;
     border-radius: 10px;
-    
 }
 
 #authentication-status{
