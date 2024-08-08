@@ -50,12 +50,10 @@
  
 
   <!--TOP BAR-->
+  <!--TOP BAR-->
   <div class="topnav">
-    <video class="logo" autoplay loop muted playsinline>
-        <source src="img/logo-mp4.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
+    <img class="logo" src="img/logo09-vetorizada.svg">
+  </div>
 
 
   
@@ -88,20 +86,20 @@
       <!-- CARD NOTIFICAÇÃO -->
   <div class="card notifications-card">
     <h2><i class="fa-solid fa-bell"></i> Notificações:</h2>
-    <p class="notification">18:43 - Varedura do sistema completa</p>
-    <p class="notification">22:30 - Houve uma queda de energia</p>
-    <p class="notification">22:31 - Sistema reiniciado com sucesso</p>
-    <p class="notification">22:31 - Dados recuperados com sucesso</p>
-    <p class="notification">23:05 - Alterado tempo de acionamento ventilação de 5 para 12 minutos</p>
-    <p class="notification">06:15 - Iluminação acionada</p>
-    <p class="notification">07:00 - Iniciado sistema de irrigação</p>
-    <p class="notification">07:05 - Irrigação concluida</p>
+    <p class="notification">18:43 - Varedura do sistema completa.</p>
+    <p class="notification">22:30 - Houve uma queda de energia!</p>
+    <p class="notification">22:31 - Sistema reiniciado com sucesso.</p>
+    <p class="notification">22:31 - Dados recuperados com sucesso.</p>
+    <p class="notification">23:05 - Alterado tempo de acionamento ventilação de 5 para 12 minutos.</p>
+    <p class="notification">06:15 - Iluminação acionada...</p>
+    <p class="notification">07:00 - Iniciado sistema de irrigação...</p>
+    <p class="notification">07:05 - Irrigação concluida.</p>
 </div>
 
       <!-- CARD DE ILUMINAÇÃO -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-iluminacao"></i>
-          <h1><i class="fa-solid fa-sun" style="color: #ffc600;"></i> Iluminação <i class="fa-solid fa-sun" style="color: #ffc600;"></i></h1>
+          <h1><i class="fa-solid fa-sun" style="color: #000000;"></i> Iluminação <i class="fa-solid fa-sun" style="color: #000000;"></i></h1>
       
           <label><span class="led" id="led-indicator-iluminacao"></span></label>
           
@@ -130,7 +128,7 @@
       <!-- CARD TEMPERATURA -->
       <div class="card">
         <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
-        <h1><i class="fas fa-thermometer-half" style="color:#e72b3b;"></i> Temperatura <i class="fas fa-thermometer-half" style="color:#e72b3b;"></i></h1>
+        <h1><i class="fas fa-thermometer-half" style="color:#000000;"></i> Temperatura <i class="fas fa-thermometer-half" style="color:#000000;"></i></h1>
         
             <label> <span class="led" id="led-indicator-temperatura"></span></label>
         
@@ -147,7 +145,7 @@
       <!-- CARD UMIDADE -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-umidade"></i>
-          <h1><i class="fas fa-tint" style="color:#00add6;"></i> Umidade <i class="fas fa-tint" style="color:#00add6;"></i></h1>
+          <h1><i class="fas fa-tint" style="color:#000000;"></i> Umidade <i class="fas fa-tint" style="color:#000000;"></i></h1>
               <label> <span class="led" id="led-indicator-umidade"></span></label>
           <h2><span class="reading">Atual: <span id="hum"></span> &percnt;</span></h2>
           <p1><i class="fa-solid fa-wrench"></i> </p1>
@@ -162,10 +160,10 @@
       <!-- CARD VENTILAÇÃO -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-ventilacao"></i>
-          <h1><i class="fa-solid fa-wind" style="color: #603ffc;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #603ffc;"></i></h1>
+          <h1><i class="fa-solid fa-wind" style="color: #000000;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #000000;"></i></h1>
               <label> <span class="led" id="led-indicator-ventilacao"></span></label>
           
-          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao">0</span></h2>
+          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao"></span></h2>
           <p1><i class="fa-solid fa-plug-circle-bolt"></i></p1>
           
           <p><span class="reading01"><span> On: </span><span id="ventilacaoAdjustLiga"></span> min.</span></p>
@@ -178,7 +176,7 @@
       <!-- CARD IRRIGAÇÃO -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-irrigacao"></i>
-          <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #6d8dc9;"></i> Irrigação <i class="fa-solid fa-cloud-showers-heavy" style="color: #6d8dc9;"></i></h1>
+          <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i> Irrigação <i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i></h1>
               <label> <span class="led" id="led-indicator-irrigacao"></span></label>
           <p>Acionamento 01</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
