@@ -67,7 +67,7 @@
       <label for="input-password"><b>Senha</b></label>
       <input type="password" placeholder="Digite sua Senha" id="input-password" required>
 
-      <button type="submit" id="login-button">Login</button>
+      <button type="submit" id="login-button">Entrar</button>
       <p id="error-message" style="color:red;"></p>
     </div>
   </form>
@@ -85,15 +85,15 @@
 
       <!-- CARD NOTIFICAÇÃO -->
   <div class="card notifications-card">
-    <h2><i class="fa-solid fa-bell"></i> Notificações:</h2>
+    <h1><i class="fa-solid fa-bell"></i> Notificações <i class="fa-solid fa-bell"></i></h1>
+    <p class="notification">07:05 - Irrigação concluida.</p>
+    <p class="notification">07:00 - Iniciado sistema de irrigação...</p>
+    <p class="notification">06:15 - Iluminação acionada...</p>
     <p class="notification">18:43 - Varedura do sistema completa.</p>
-    <p class="notification">22:30 - Houve uma queda de energia!</p>
     <p class="notification">22:31 - Sistema reiniciado com sucesso.</p>
     <p class="notification">22:31 - Dados recuperados com sucesso.</p>
-    <p class="notification">23:05 - Alterado tempo de acionamento ventilação de 5 para 12 minutos.</p>
-    <p class="notification">06:15 - Iluminação acionada...</p>
-    <p class="notification">07:00 - Iniciado sistema de irrigação...</p>
-    <p class="notification">07:05 - Irrigação concluida.</p>
+    <p class="notification">22:30 - Houve uma queda de energia!</p>
+    <p class="notification">23:05 - Alterado tempo de acionamento ventilação</p>    
 </div>
 
       <!-- CARD DE ILUMINAÇÃO -->
@@ -104,23 +104,24 @@
           <label><span class="led" id="led-indicator-iluminacao"></span></label>
           
           
-          <h2>Ligado: <span id="horas-ligado">0:00</span> h</h2>
+          <h2>Acionado: <span id="horas-ligado">0:00</span> h</h2>
           <p1><span><i class="fa-solid fa-plug-circle-bolt"></i></span></p1>
           <p>
-              <label for="ligar">Hora: </label><span id="ligar-value"></span>
+              <label for="ligar"></label><span id="ligar-value"></span> h
               <input class="temp-slider" type="range" id="ligar" min="0" max="23" step="1" disabled>
           </p>
           <p>
-              <label for="ligarMin">Minuto: </label><span id="ligar-value-min"></span>
+              <label for="ligarMin"></label><span id="ligar-value-min"></span> min
               <input class="temp-slider" type="range" id="ligarMin" min="0" max="59" step="1" disabled>
           </p>
           <p1><span><i class="fa-solid fa-plug-circle-xmark"></i></span></p1>
+        
           <p>
-              <label for="desligar">Hora: </label><span id="desligar-value"></span>
+              <label for="desligar"></label><span id="desligar-value"></span> h
               <input class="temp-slider" type="range" id="desligar" min="0" max="23" step="1" disabled>
           </p>
           <p>
-              <label for="desligarMin">Minuto: </label><span id="desligar-value-min"></span>
+              <label for="desligarMin"></label> <span id="desligar-value-min"></span> min
               <input class="temp-slider" type="range" id="desligarMin" min="0" max="59" step="1" disabled>
           </p>
       </div>
@@ -178,20 +179,21 @@
           <i class="fa-solid fa-lock lock-icon" id="lock-irrigacao"></i>
           <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i> Irrigação <i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i></h1>
               <label> <span class="led" id="led-indicator-irrigacao"></span></label>
+              <h2>Nível: <span id="horas-ligado-ventilacao"></span>Alto</h2>
           <p>Acionamento 01</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao" min="0" max="23" step="1" disabled>
-          <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust"></span> s</span></p>
+          <p><span class="reading01"><span><p1 class="fa-solid fa-clock"="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust"></span> s</span></p>
           <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao" disabled>
           <p>Acionamento 02</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1>  </span><span id="ligar-value-irrigacao02"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao02" min="0" max="23" step="1" disabled>
-          <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust02"></span> s</span></p>
+          <p><span class="reading01"><span><p1 class="fa-solid fa-clock"></p1> </span><span id="irrigacaoAdjust02"></span> s</span></p>
           <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao02" disabled>
           <p>Acionamento 03</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao03"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao03" min="0" max="23" step="1" disabled>
-          <p><span class="reading01"><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust03"></span> s</span></p>
+          <p><span class="reading01"><span><p1 class="fa-solid fa-clock"></p1> </span><span id="irrigacaoAdjust03"></span> s</span></p>
           <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao03" disabled>
       </div>
   </div>
@@ -201,12 +203,11 @@
     <div id="charts-div" >
       <!--SET NUMBER OF READINGS INPUT FIELD // DEFINIR O NUMERO DE LEITURAS NO CAMPO DE ENTRADA  --> 
       <div>
-        <p> GRAFICOS</p>
+        <h1> GRÁFICOS</h1>
       </div>
       <!--TEMPERATURE-CHART-->
       <div class="cards">
-        <div class="card">
-          <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURA</p>
+        <div class="card-chart">
           <div id="chart-temperature" class="chart-container"></div>
         </div>
       </div>

@@ -18,7 +18,7 @@ p {
 }
 
 p1 {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: rgb(35, 35, 35);
 }
 
@@ -43,7 +43,7 @@ body {
 
 /* Estilos para a logo */
 .topnav .logo {
-    width: 95%; /* Mantém a proporção da imagem */
+    width: 85%; /* Mantém a proporção da imagem */
 }
 
 #authentication-bar{
@@ -131,7 +131,7 @@ body {
     background-color: #9cfd9c81; /* Fundo verde claro */
 }
 
-.notification:nth-child(3) {
+.notification:nth-child(8) {
     background-color: #ffd6d6; /* Fundo vermelho claro */
     animation: blinkRed1 1.5s infinite;
 }
@@ -197,8 +197,8 @@ body {
 }
 
 button {
-    background-color: #049faa;
-    color: white;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -316,6 +316,11 @@ input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform
     height: 100%;
   }
 
+  .card-chart{
+    margin: 0px;
+  
+  }
+
   /* Adicione ao arquivo styles.css */
 
   footer {
@@ -329,6 +334,6 @@ input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform
 }
 
 .footer-bottom {
-    font-size: 14px;
+    font-size: 10px;
     color: #ffffff;
 }
