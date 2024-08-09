@@ -15,7 +15,7 @@ function createTemperatureChart() {
     },
     series: [
       {
-        name: 'BME280'
+        name: 'Temperatura'
       }
     ],
     title: { 
@@ -35,7 +35,7 @@ function createTemperatureChart() {
     },
     yAxis: {
       title: { 
-        text: 'Temperature Celsius Degrees' 
+        text: 'Temperatura &deg;C' 
       }
     },
     credits: { 

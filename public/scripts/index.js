@@ -661,16 +661,12 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
 });
 
 
-
-
-
-
 //-------------------------------------------------------------------------------------------
     dbRefTemp.on('value', snap => {
 
       tempElement.innerText = snap.val().toFixed(1);
       var x = (new Date()).getTime(),
-      y= parseFloat(snap.val().toFixed(2));
+      y= parseFloat(snap.val().toFixed(1));
 
       //y = parseFloat(this.responseText);
       //console.log(this.responseText);

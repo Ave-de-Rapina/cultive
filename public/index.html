@@ -28,7 +28,6 @@
   messagingSenderId: "36987383898",
   appId: "1:36987383898:web:e482ff51809c5d8842a863",
   measurementId: "G-0Q70VWVTZZ"
-    
   };
 
   // Initialize firebase
@@ -47,16 +46,10 @@
 
 <body>
 
- 
-
-  <!--TOP BAR-->
   <!--TOP BAR-->
   <div class="topnav">
     <img class="logo" src="img/logo09-vetorizada.svg">
   </div>
-
-
-  
 
   <!--LOGIN FORM-->
   <form id="login-form" style="display: none;">
@@ -96,43 +89,11 @@
     <p class="notification">23:05 - Alterado tempo de acionamento ventilação</p>    
 </div>
 
-      <!-- CARD DE ILUMINAÇÃO -->
-      <div class="card">
-          <i class="fa-solid fa-lock lock-icon" id="lock-iluminacao"></i>
-          <h1><i class="fa-solid fa-sun" style="color: #000000;"></i> Iluminação <i class="fa-solid fa-sun" style="color: #000000;"></i></h1>
-      
-          <label><span class="led" id="led-indicator-iluminacao"></span></label>
-          
-          
-          <h2>Acionado: <span id="horas-ligado">0:00</span> h</h2>
-          <p1><span><i class="fa-solid fa-plug-circle-bolt"></i></span></p1>
-          <p>
-              <label for="ligar"></label><span id="ligar-value"></span> h
-              <input class="temp-slider" type="range" id="ligar" min="0" max="23" step="1" disabled>
-          </p>
-          <p>
-              <label for="ligarMin"></label><span id="ligar-value-min"></span> min
-              <input class="temp-slider" type="range" id="ligarMin" min="0" max="59" step="1" disabled>
-          </p>
-          <p1><span><i class="fa-solid fa-plug-circle-xmark"></i></span></p1>
-        
-          <p>
-              <label for="desligar"></label><span id="desligar-value"></span> h
-              <input class="temp-slider" type="range" id="desligar" min="0" max="23" step="1" disabled>
-          </p>
-          <p>
-              <label for="desligarMin"></label> <span id="desligar-value-min"></span> min
-              <input class="temp-slider" type="range" id="desligarMin" min="0" max="59" step="1" disabled>
-          </p>
-      </div>
-
       <!-- CARD TEMPERATURA -->
       <div class="card">
         <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
         <h1><i class="fas fa-thermometer-half" style="color:#000000;"></i> Temperatura <i class="fas fa-thermometer-half" style="color:#000000;"></i></h1>
-        
-            <label> <span class="led" id="led-indicator-temperatura"></span></label>
-        
+        <label> <span class="led" id="led-indicator-temperatura"></span></label>
         <h2><span class="reading">Atual: <span id="temp"></span> &deg;C</span></h2>
         <p1><i class="fa-solid fa-wrench"></i></p1>
         <p><span class="reading01">Setpoint: <span id="tempAdjus"></span> &deg;C</span></p>
@@ -141,13 +102,13 @@
         <input type="range" min="0" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-histerese" disabled>
         <p><span class="reading01">Offset: <span id="tempAdjusOffset"></span> &deg;C</span></p>
         <input type="range" min="-3" max="3" step="0.1" class="temp-slider" id="temp-slider-temperatura-offset" disabled>
-    </div>
+      </div>
 
       <!-- CARD UMIDADE -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-umidade"></i>
           <h1><i class="fas fa-tint" style="color:#000000;"></i> Umidade <i class="fas fa-tint" style="color:#000000;"></i></h1>
-              <label> <span class="led" id="led-indicator-umidade"></span></label>
+          <label> <span class="led" id="led-indicator-umidade"></span></label>
           <h2><span class="reading">Atual: <span id="hum"></span> &percnt;</span></h2>
           <p1><i class="fa-solid fa-wrench"></i> </p1>
           <p><span class="reading01">Setpoint: <span id="umidadeAdjust"></span> %</span></p>
@@ -162,24 +123,37 @@
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-ventilacao"></i>
           <h1><i class="fa-solid fa-wind" style="color: #000000;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #000000;"></i></h1>
-              <label> <span class="led" id="led-indicator-ventilacao"></span></label>
-          
-          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao"></span></h2>
-          <p1><i class="fa-solid fa-plug-circle-bolt"></i></p1>
-          
-          <p><span class="reading01"><span> On: </span><span id="ventilacaoAdjustLiga"></span> min.</span></p>
+          <label> <span class="led" id="led-indicator-ventilacao"></span></label>
+          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao"></span></h2>          
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoAdjustLiga"></span> min</span></p>
           <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-liga" disabled>
-          <p1><i class="fa-solid fa-plug-circle-xmark"></i></p1>
-          <p><span class="reading01"><span> Off: </span><span id="ventilacaoAdjustDesliga"></span> min.</span></p>
+          <p1></p1>
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoAdjustDesliga"></span> min</span></p>
           <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
+      </div>
+
+      <!-- CARD DE ILUMINAÇÃO -->
+      <div class="card">
+        <i class="fa-solid fa-lock lock-icon" id="lock-iluminacao"></i>
+        <h1><i class="fa-solid fa-sun" style="color: #000000;"></i> Iluminação <i class="fa-solid fa-sun" style="color: #000000;"></i></h1>
+        <label><span class="led" id="led-indicator-iluminacao"></span></label>
+        <h2>Acionado: <span id="horas-ligado">0:00</span> h</h2>
+        <p><label for="ligar"><p1 class="fa-solid fa-plug-circle-bolt"><p1/></label> <span id="ligar-value"></span> h </p>
+        <input class="temp-slider" type="range" id="ligar" min="0" max="23" step="1" disabled>
+        <p><label for="ligarMin"><p1 class="fa-solid fa-plug-circle-bolt"><p1/></label> <span id="ligar-value-min"></span> min</p>
+        <input class="temp-slider" type="range" id="ligarMin" min="0" max="59" step="1" disabled>
+        <p><label for="desligar"><p1 class="fa-solid fa-plug-circle-xmark"></p1></label> <span id="desligar-value"></span> h</p>
+        <input class="temp-slider" type="range" id="desligar" min="0" max="23" step="1" disabled>
+        <p><label for="desligarMin"><p1 class="fa-solid fa-plug-circle-xmark"></p1></label> <span id="desligar-value-min"></span> min</p>
+        <input class="temp-slider" type="range" id="desligarMin" min="0" max="59" step="1" disabled>
       </div>
 
       <!-- CARD IRRIGAÇÃO -->
       <div class="card">
           <i class="fa-solid fa-lock lock-icon" id="lock-irrigacao"></i>
           <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i> Irrigação <i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i></h1>
-              <label> <span class="led" id="led-indicator-irrigacao"></span></label>
-              <h2>Nível: <span id="horas-ligado-ventilacao"></span>Alto</h2>
+          <label> <span class="led" id="led-indicator-irrigacao"></span></label>
+          <h2>Nível: <span id="horas-ligado-ventilacao"></span>Alto</h2>
           <p>Acionamento 01</p>
           <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
           <input class="temp-slider" type="range" id="ligar-irrigacao" min="0" max="23" step="1" disabled>
