@@ -222,7 +222,7 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-}
+}/*
 .switch {position: relative; display: inline-block; width: 120px; height: 68px; margin-bottom: 20px;}
 .switch input {display: none;}
 .slider {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; border-radius: 68px;   opacity: 0.8;   cursor: pointer;}
@@ -237,7 +237,7 @@ input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform
 .card-light{ color: #008B74;}
 .card-bme{ color: #572dfb;}
 .card-motion{ color: #3b3b3b; cursor: pointer;}
-
+*/
 /*ILUMINAÇÃO*/
 
 

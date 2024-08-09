@@ -671,7 +671,7 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
       //y = parseFloat(this.responseText);
       //console.log(this.responseText);
       
-      if(chartT.series[0].data.length > 1000) {
+      if(chartT.series[0].data.length > 10000) {
         chartT.series[0].addPoint([x, y], true, true, true);
       } else {
         chartT.series[0].addPoint([x, y], true, false, true);
@@ -679,7 +679,19 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
 
     });
     dbRefHum.on('value', snap => {
-      humElement.innerText = snap.val().toFixed(1);
+      humElement.innerText = snap.val().toFixed(0);
+      var x = (new Date()).getTime(),
+      y= parseFloat(snap.val().toFixed(0));
+
+      //y = parseFloat(this.responseText);
+      //console.log(this.responseText);
+      
+      if(chartH.series[0].data.length > 10000) {
+        chartH.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartH.series[0].addPoint([x, y], true, false, true);
+      }
+
     });
     dbRefStatusLedIluminacao.on('value', snap => {
       const ledState = snap.val();
@@ -779,27 +791,6 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
 } 
 
 
-
-//ligarInput.addEventListener('input', updateLedStatus);
-//desligarInput.addEventListener('input', updateLedStatus);
-
-
-
-/*
-function toggleLed() {
-  console.log("Toggle");
-  if (ledElement.checked) 
-  {
-    console.log("led ON");
-    firebase.database().ref(dbPathLed).set("ON");
-  }
-  else{
-    console.log("led OFF");
-    firebase.database().ref(dbPathLed).set("OFF");
-  }
-}
-*/
-
 /*
 setInterval(function ( ) {
  
@@ -807,7 +798,7 @@ setInterval(function ( ) {
       y=5;
           //y = parseFloat(this.responseText);
       //console.log(this.responseText);
-      if(chartT.series[0].data.length > 40) {
+      if(chartT.series[0].data.length > 1000) {
         chartT.series[0].addPoint([x, y], true, true, true);
       } else {
         chartT.series[0].addPoint([x, y], true, false, true);
