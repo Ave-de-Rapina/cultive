@@ -76,7 +76,7 @@ function createHumidityChart(){
     },
     yAxis: {
       title: { 
-        text: 'Humidity (%)' 
+        text: 'Humidade (%)' 
       }
     },
     credits: { 

@@ -5,8 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     slider.oninput = function() {
         output.innerHTML = this.value;
-        
-        
+
         // Update temperature value in Firebase
         firebase.database().ref(dbPath02).set({
             umidadeAjuste: output.innerHTML

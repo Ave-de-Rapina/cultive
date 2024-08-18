@@ -89,46 +89,49 @@ var dbPath16;
 // MANAGE LOGIN/LOGOUT UI     -ESTUDAR
 const setupUI = (user) => {
   if (user) {
-    //toggle UI elements
+    // Toggle UI elements
     loginElement.style.display = 'none';
     contentElement.style.display = 'block';
-    authBarElement.style.display ='block';
-    userDetailsElement.style.display ='block';
+    authBarElement.style.display = 'block';
+    userDetailsElement.style.display = 'block';
     userDetailsElement.innerHTML = user.email;
 
-    // get user UID to get data from database
-    var uid = user.uid;   //VARIAVEL uid ESTA RECENBENDO O UID DO USUARIO PARA OBTER DADOS DO BANCO DE DADOS
-    console.log(uid);   //MANDAR ESCREVER NO CONSOLE O UID do usuario
+    // Get user UID to get data from the database
+    var uid = user.uid;
+    console.log(uid);
 
-    // Database paths (with user UID)
-    var dbPathTemp = 'UsersData/' + uid.toString()+ '/temperature'; //VAI PASSAR O ENDEREÇO DO BANCO DE DADOS PARA dbPathTemp 
-    var dbPathHum = 'UsersData/' + uid.toString() + '/humidity';    //uid.toString VAI CONVERTER O VALOR DE UID SEJA FLOAT, INT... PARA STRING
-    var dbPathStatusLedIluminacao = 'UsersData/' + uid.toString() + '/statusLedIluminacao';
-    var dbPathStatusLedTemperatura = 'UsersData/' + uid.toString() + '/statusLedTemperatura';
-    var dbPathStatusLedUmidade = 'UsersData/' + uid.toString() + '/statusLedUmidade';
-    var dbPathStatusLedVentilacao = 'UsersData/' + uid.toString() + '/statusLedVentilacao';
-    var dbPathStatusLedIrrigacao = 'UsersData/' + uid.toString() + '/statusLedIrrigacao';
-    var dbPathTemp02 = 'UsersData/' + uid.toString() + '/temperature02'; 
-    var dbPathHum02 = 'UsersData/' + uid.toString() + '/humidity02';    
-    //var dbPathPres = 'UsersData/' + uid.toString() + '/pressure:';  //dbPathPres VAI ESTAR O ENDEREÇO DO BANCO DE DADOS UID com o uid do usuario
-    dbPathOn = 'UsersData/' + uid.toString() + '/ajusteIluminacaoLiga';
-    dbPathOff = 'UsersData/' + uid.toString() + '/ajusteIluminacaoDesliga';
-    dbPath01 = 'UsersData/' + uid.toString() + '/ajusteTemperatura';
-    dbPath02 = 'UsersData/' + uid.toString() + '/ajusteUmidade';
-    dbPath03 = 'UsersData/' + uid.toString() + '/ajusteVentilacaoLiga';
-    dbPath04 = 'UsersData/' + uid.toString() + '/ajusteVentilacaoDesliga';
-    dbPath05 = 'UsersData/' + uid.toString() + '/ajusteIrrigacao';
-    dbPath06 = 'UsersData/' + uid.toString() + '/ajusteIluminacaoLigaMin';
-    dbPath07 = 'UsersData/' + uid.toString() + '/ajusteIluminacaoDesligaMin';
-    dbPath08 = 'UsersData/' + uid.toString() + '/ajusteIrrigacaoHora';
-    dbPath09 = 'UsersData/' + uid.toString() + '/ajusteIrrigacaoHora02';
-    dbPath10 = 'UsersData/' + uid.toString() + '/ajusteIrrigacao02';
-    dbPath11 = 'UsersData/' + uid.toString() + '/ajusteIrrigacaoHora03';
-    dbPath12 = 'UsersData/' + uid.toString() + '/ajusteIrrigacao03';
-    dbPath13 = 'UsersData/' + uid.toString() + '/ajusteTemperaturaHisterese';
-    dbPath14 = 'UsersData/' + uid.toString() + '/ajusteTemperaturaOffset';
-    dbPath15 = 'UsersData/' + uid.toString() + '/ajusteUmidadeHisterese';
-    dbPath16 = 'UsersData/' + uid.toString() + '/ajusteUmidadeOffset';
+    // Extract the portion of the email before the '@'
+    var emailPrefix = user.email.split('@')[0];
+
+    // Database paths (with user email prefix and UID)
+    var dbPathTemp = `${emailPrefix}/${uid.toString()}/temperature/temperature`;
+    var dbPathHum = `${emailPrefix}/${uid.toString()}/humidity/humidity`;
+    var dbPathStatusLedIluminacao = `${emailPrefix}/${uid.toString()}/statusLedIluminacao/status`;
+    var dbPathStatusLedTemperatura = `${emailPrefix}/${uid.toString()}/statusLedTemperatura/status`;
+    var dbPathStatusLedUmidade = `${emailPrefix}/${uid.toString()}/statusLedUmidade/status`;
+    var dbPathStatusLedVentilacao = `${emailPrefix}/${uid.toString()}/statusLedVentilacao/status`;
+    var dbPathStatusLedIrrigacao = `${emailPrefix}/${uid.toString()}/statusLedIrrigacao/status`;
+    var dbPathTemp02 = `${emailPrefix}/${uid.toString()}/temperature02`;
+    var dbPathHum02 = `${emailPrefix}/${uid.toString()}/humidity02`;
+    dbPathOn = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoLiga`;
+    dbPathOff = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoDesliga`;
+    dbPath01 = `${emailPrefix}/${uid.toString()}/ajusteTemperatura`;
+    dbPath02 = `${emailPrefix}/${uid.toString()}/ajusteUmidade`;
+    dbPath03 = `${emailPrefix}/${uid.toString()}/ajusteVentilacaoLiga`;
+    dbPath04 = `${emailPrefix}/${uid.toString()}/ajusteVentilacaoDesliga`;
+    dbPath05 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacao`;
+    dbPath06 = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoLigaMin`;
+    dbPath07 = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoDesligaMin`;
+    dbPath08 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacaoHora`;
+    dbPath09 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacaoHora02`;
+    dbPath10 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacao02`;
+    dbPath11 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacaoHora03`;
+    dbPath12 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacao03`;
+    dbPath13 = `${emailPrefix}/${uid.toString()}/ajusteTemperaturaHisterese`;
+    dbPath14 = `${emailPrefix}/${uid.toString()}/ajusteTemperaturaOffset`;
+    dbPath15 = `${emailPrefix}/${uid.toString()}/ajusteUmidadeHisterese`;
+    dbPath16 = `${emailPrefix}/${uid.toString()}/ajusteUmidadeOffset`;
+
     //dbPathLed = 'UsersData/' + uid.toString() + '/led';
 
     // Database references
@@ -679,9 +682,9 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
 
     });
     dbRefHum.on('value', snap => {
-      humElement.innerText = snap.val().toFixed(0);
+      humElement.innerText = snap.val().toFixed(1);
       var x = (new Date()).getTime(),
-      y= parseFloat(snap.val().toFixed(0));
+      y= parseFloat(snap.val().toFixed(1));
 
       //y = parseFloat(this.responseText);
       //console.log(this.responseText);
