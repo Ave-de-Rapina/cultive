@@ -86,7 +86,8 @@ function createTemperatureChart() {
             fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y
           }
         },
-        tickPixelInterval: 20, // Intervalo entre as marcas do eixo Y
+        tickInterval: 0.1, // Define o intervalo entre os ticks, evitando repetições
+        tickPixelInterval: 40, // Intervalo entre as marcas do eixo Y
       },
       {
         title: { 
@@ -199,7 +200,8 @@ function createHumidityChart() {
             fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y
           }
         },
-        tickPixelInterval: 20 // Intervalo entre as marcas do eixo Y
+        tickInterval: 1, // Define o intervalo entre os ticks, evitando repetições
+        tickPixelInterval: 40 // Intervalo entre as marcas do eixo Y
       },
       {
         title: { 
