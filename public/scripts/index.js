@@ -1,9 +1,11 @@
+// Variáveis globais para armazenar os valores mais recentes
 var tempInt = null;
 var tempExt = null;
 var humidityInt = null;
-var humidityExt = null; // Se tiver uma segunda umidade
+var humidityExt = null;
 var ledStateIluminacao = null;
-var ledStateTemperatura = null;
+var ledStateVentilacao = null;
+var ledStateIrrigacao = null;
 
 const loginElement = document.querySelector('#login-form');
 const contentElement = document.querySelector("#content-sign-in");
@@ -670,7 +672,8 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
 
 
 //---------------------------------GRAFICOS----------------------------------------------------------
-// Variáveis globais para armazenar os valores mais recentes
+
+
 function getBrasiliaTime() {
   var now = new Date();
   now.setUTCHours(now.getUTCHours() - 3); // Ajusta para UTC-3 (Brasília)
@@ -680,6 +683,7 @@ function getBrasiliaTime() {
 function updateChart() {
   var x = getBrasiliaTime(); // Tempo atual ajustado para Brasília
 
+  // Atualiza o gráfico de temperatura
   if (tempInt !== null) {
     chartT.series[0].addPoint([x, tempInt], true, false, true);
   }
@@ -688,6 +692,19 @@ function updateChart() {
     chartT.series[1].addPoint([x, tempExt], true, false, true);
   }
 
+  if (ledStateIluminacao !== null) {
+    chartT.series[2].addPoint([x, ledStateIluminacao], true, false, true);
+  }
+
+  if (ledStateVentilacao !== null) {
+    chartT.series[3].addPoint([x, ledStateVentilacao], true, false, true);
+  }
+
+  if (ledStateIrrigacao !== null) {
+    chartT.series[4].addPoint([x, ledStateIrrigacao], true, false, true);
+  }
+
+  // Atualiza o gráfico de umidade
   if (humidityInt !== null) {
     chartH.series[0].addPoint([x, humidityInt], true, false, true);
   }
@@ -697,34 +714,45 @@ function updateChart() {
   }
 
   if (ledStateIluminacao !== null) {
-    chartT.series[2].addPoint([x, ledStateIluminacao], true, false, true);
+    chartH.series[2].addPoint([x, ledStateIluminacao], true, false, true);
+  }
+
+  if (ledStateVentilacao !== null) {
+    chartH.series[3].addPoint([x, ledStateVentilacao], true, false, true);
+  }
+
+  if (ledStateIrrigacao !== null) {
+    chartH.series[4].addPoint([x, ledStateIrrigacao], true, false, true);
   }
 }
 
+// Atualiza os dados de temperatura
 dbRefTemp.on('value', snap => {
   tempInt = parseFloat(snap.val().toFixed(1));
   tempElement.innerText = tempInt;
-  updateChart(); // Chama a função para atualizar o gráfico
+  updateChart(); // Chama a função para atualizar os gráficos
 });
 
 dbRefTemp2.on('value', snap => {
   tempExt = parseFloat(snap.val().toFixed(1));
   tempElement2.innerText = tempExt;
-  updateChart(); // Chama a função para atualizar o gráfico
+  updateChart(); // Chama a função para atualizar os gráficos
 });
 
+// Atualiza os dados de umidade
 dbRefHum.on('value', snap => {
   humidityInt = parseFloat(snap.val().toFixed(1));
   humElement.innerText = humidityInt;
-  updateChart(); // Chama a função para atualizar o gráfico
+  updateChart(); // Chama a função para atualizar os gráficos
 });
 
 dbRefHum2.on('value', snap => {
   humidityExt = parseFloat(snap.val().toFixed(1));
   humElement2.innerText = humidityExt;
-  updateChart(); // Chama a função para atualizar o gráfico
+  updateChart(); // Chama a função para atualizar os gráficos
 });
 
+// Atualiza os estados dos LEDs de Iluminação
 dbRefStatusLedIluminacao.on('value', snap => {
   ledStateIluminacao = snap.val();
 
@@ -738,13 +766,45 @@ dbRefStatusLedIluminacao.on('value', snap => {
     ledIndicator.classList.remove('on');
   }
 
-  updateChart(); // Chama a função para atualizar o gráfico
+  updateChart(); // Chama a função para atualizar os gráficos
+});
+
+// Atualiza os estados dos LEDs de Ventilação
+dbRefStatusLedVentilacao.on('value', snap => {
+  ledStateVentilacao = snap.val();
+
+  // Atualiza o estado do LED no DOM
+  const ledIndicator = document.getElementById("led-indicator-ventilacao");
+  if (ledStateVentilacao === 1) {
+    ledIndicator.classList.add('on');
+    ledIndicator.classList.remove('off');
+  } else {
+    ledIndicator.classList.add('off');
+    ledIndicator.classList.remove('on');
+  }
+
+  updateChart(); // Chama a função para atualizar os gráficos
+});
+
+// Atualiza os estados dos LEDs de Irrigação
+dbRefStatusLedIrrigacao.on('value', snap => {
+  ledStateIrrigacao = snap.val();
+
+  // Atualiza o estado do LED no DOM
+  const ledIndicator = document.getElementById("led-indicator-irrigacao");
+  if (ledStateIrrigacao === 1) {
+    ledIndicator.classList.add('on');
+    ledIndicator.classList.remove('off');
+  } else {
+    ledIndicator.classList.add('off');
+    ledIndicator.classList.remove('on');
+  }
+
+  updateChart(); // Chama a função para atualizar os gráficos
 });
 
 
-
     //--------------------------STATUS LED-----------------------------------------------------
-
     
     dbRefStatusLedTemperatura.on('value', snap => {
       const ledState = snap.val();

@@ -316,10 +316,7 @@ input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform
     height: 100%;
   }
 
-  .card-chart{
-    margin: 0px;
-  
-  }
+
 
   /* Adicione ao arquivo styles.css */
 

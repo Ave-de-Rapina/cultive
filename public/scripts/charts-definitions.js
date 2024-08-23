@@ -5,15 +5,14 @@ function onload(event){
   chartH = createHumidityChart();
 }
 
-// Adiciona uma nova série ao gráfico de temperatura para o estado do LED
 function createTemperatureChart() {
   var chart = new Highcharts.Chart({
     chart: { 
       renderTo: 'chart-temperature',
       type: 'spline',
-      height: 300, // Mantém a altura compacta
-      marginLeft: 70, // Mantém as margens ajustadas
-      marginRight: 70,
+      height: 400, // Altura do gráfico
+      marginLeft: 25, // Margem esquerda ajustada para acomodar a escala do eixo Y
+      marginRight: 20, // Margem direita ajustada para acomodar a escala do eixo Y secundário
     },
     series: [
       {
@@ -25,13 +24,27 @@ function createTemperatureChart() {
         color: 'blue'
       },
       {
-        name: 'Estado das Saídas', // Atualizado para "Estado das Saídas"
-        color: 'orange', // Cor alterada para laranja
+        name: 'Estado das Saídas',
+        color: 'orange',
         yAxis: 1 // Usando um eixo Y secundário para o LED
+      },
+      {
+        name: 'Ventilação',
+        color: 'green',
+        yAxis: 1 // Usando o mesmo eixo Y secundário
+      },
+      {
+        name: 'Irrigação',
+        color: 'purple',
+        yAxis: 1 // Usando o mesmo eixo Y secundário
       }
     ],
     title: { 
-      text: undefined 
+      text: 'Temperatura (°C)', // Título do gráfico
+      style: {
+        fontSize: '18px', // Tamanho da fonte do título
+        fontWeight: 'bold' // Negrito no título
+      }
     },
     plotOptions: {
       line: {
@@ -49,94 +62,106 @@ function createTemperatureChart() {
         hour: '%H:%M:%S'
       },
       labels: {
+        y: 20, // Ajusta o espaçamento vertical dos rótulos do eixo X
         formatter: function() {
-          var date = new Date(this.value);
-          date.setUTCHours(date.getUTCHours() - 3);
-          return Highcharts.dateFormat('%H:%M:%S', date.getTime());
+          return Highcharts.dateFormat('%H:%M:%S', this.value);
         },
         style: {
-          fontSize: '10px' // Reduz o tamanho da fonte para o eixo X
+          fontSize: '10px' // Tamanho da fonte do eixo X
         }
       }
     },
     yAxis: [
       {
         title: { 
-          text: 'Temperatura &deg;C',
-          style: {
-            fontSize: '10px' // Mantém o tamanho da fonte do título do eixo Y
-          },
-          align: 'middle', // Centraliza o título do eixo Y
-          rotation: 270, // Mantém o título na orientação vertical
-          x: -5 // Aproxima o título do eixo, diminuindo o espaçamento
+          text: null // Remove o texto do eixo Y esquerdo
         },
         labels: {
+          align: 'left', // Alinha os rótulos do eixo Y à esquerda
+          x: -20, // Ajusta a posição das etiquetas mais perto da margem, mas fora do gráfico
           formatter: function() {
-            return this.value.toFixed(1);
+            return this.value.toFixed(1) + '°';
           },
           style: {
-            fontSize: '10px' // Reduz o tamanho da fonte para as etiquetas do eixo Y
+            fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y
           }
         },
-        tickPixelInterval: 20, // Diminui o espaçamento entre as marcas do eixo Y
+        tickPixelInterval: 20, // Intervalo entre as marcas do eixo Y
       },
       {
         title: { 
-          text: 'Estado das Saídas', // Texto atualizado para "Estado das Saídas"
-          style: {
-            fontSize: '10px' // Mantém o tamanho da fonte do título do eixo Y secundário
-          },
-          align: 'middle', // Centraliza o título do eixo Y secundário
-          rotation: 90, // Mantém o título na orientação vertical
-          x: 5 // Aproxima o título do eixo, diminuindo o espaçamento
+          text: null // Remove o texto do eixo Y direito
         },
-        opposite: true,
+        opposite: true, // Alinha o eixo Y à direita
         max: 1,
         min: 0,
-        tickPositions: [0, 1], // Define os ticks apenas em 0 e 1
+        tickPositions: [0, 1], // Define as posições das marcas no eixo Y
         labels: {
+          align: 'right', // Alinha os rótulos do eixo Y à direita
+          x: 15, // Ajusta a posição das etiquetas mais perto da margem, mas fora do gráfico
           formatter: function() {
             return this.value === 1 ? 'On' : 'Off';
           },
           style: {
-            fontSize: '10px' // Reduz o tamanho da fonte para as etiquetas do eixo Y secundário
+            fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y secundário
           }
         }
       }
     ],
     credits: { 
-      enabled: false 
+      enabled: false // Remove o crédito padrão da Highcharts
     }
   });
+
   return chart;
 }
-
-
-
-
-
-
 
 // Create Humidity Chart
 function createHumidityChart() {
   var chart = new Highcharts.Chart({
     chart: { 
       renderTo: 'chart-humidity',
-      type: 'spline'  
+      type: 'spline',  
+      height: 400, // Altura do gráfico
+      marginLeft: 25, // Margem esquerda ajustada para acomodar a escala do eixo Y
+      marginRight: 20, // Margem direita ajustada para acomodar a escala do eixo Y secundário
     },
     series: [
       {
         name: 'Umidade int',
-        color: 'blue' // Cor da série de umidade interna
+        color: '#00008B', // Azul escuro
+        data: [] // Inicializa com um array vazio
       },
-      // Você pode adicionar outra série de umidade aqui se precisar
-       {
-         name: 'Umidade ext',
-         color: 'green' // Cor da segunda série de umidade
-       }
+      {
+        name: 'Umidade ext',
+        color: '#87CEFA', // Azul claro
+        data: [] // Inicializa com um array vazio
+      },
+      {
+        name: 'Estado das Saídas',
+        color: 'orange',
+        yAxis: 1, // Usando um eixo Y secundário para o LED
+        data: [] // Inicializa com um array vazio
+      },
+      {
+        name: 'Ventilação',
+        color: 'green',
+        yAxis: 1, // Usando o mesmo eixo Y secundário
+        data: [] // Inicializa com um array vazio
+      },
+      {
+        name: 'Irrigação',
+        color: 'purple',
+        yAxis: 1, // Usando o mesmo eixo Y secundário
+        data: [] // Inicializa com um array vazio
+      }
     ],
     title: { 
-      text: undefined
+      text: 'Umidade (%)', // Título do gráfico
+      style: {
+        fontSize: '18px', // Tamanho da fonte do título
+        fontWeight: 'bold' // Negrito no título
+      }
     },
     plotOptions: {
       line: { 
@@ -148,16 +173,59 @@ function createHumidityChart() {
     },
     xAxis: {
       type: 'datetime',
-      dateTimeLabelFormats: { second: '%H:%M:%S' }
-    },
-    yAxis: {
-      title: { 
-        text: 'Umidade (%)' 
+      dateTimeLabelFormats: { second: '%H:%M:%S' },
+      labels: {
+        y: 20, // Ajusta o espaçamento vertical dos rótulos do eixo X
+        formatter: function() {
+          return Highcharts.dateFormat('%H:%M:%S', this.value);
+        },
+        style: {
+          fontSize: '10px' // Tamanho da fonte do eixo X
+        }
       }
     },
+    yAxis: [
+      {
+        title: { 
+          text: null // Remove o texto do eixo Y para umidade
+        },
+        labels: {
+          align: 'left', // Alinha os rótulos do eixo Y à esquerda
+          x: -20, // Ajusta a posição das etiquetas mais perto da margem, mas fora do gráfico
+          formatter: function() {
+            return Math.round(this.value) + '%'; // Exibe o valor inteiro seguido de %
+          },
+          style: {
+            fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y
+          }
+        },
+        tickPixelInterval: 20 // Intervalo entre as marcas do eixo Y
+      },
+      {
+        title: { 
+          text: null // Remove o texto do eixo Y direito para os estados dos LEDs
+        },
+        opposite: true, // Alinha o eixo Y à direita
+        max: 1,
+        min: 0,
+        tickPositions: [0, 1], // Define as posições das marcas no eixo Y
+        labels: {
+          align: 'right', // Alinha os rótulos do eixo Y à direita
+          x: 15, // Ajusta a posição das etiquetas mais perto da margem, mas fora do gráfico
+          formatter: function() {
+            return this.value === 1 ? 'On' : 'Off';
+          },
+          style: {
+            fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y secundário
+          }
+        }
+      }
+    ],
     credits: { 
-      enabled: false 
+      enabled: false // Remove o crédito padrão da Highcharts
     }
   });
+
   return chart;
 }
+
