@@ -1,3 +1,9 @@
+var tempInt = null;
+var tempExt = null;
+var humidityInt = null;
+var humidityExt = null; // Se tiver uma segunda umidade
+var ledStateIluminacao = null;
+var ledStateTemperatura = null;
 
 const loginElement = document.querySelector('#login-form');
 const contentElement = document.querySelector("#content-sign-in");
@@ -7,13 +13,13 @@ const authBarElement = document.querySelector("#authentication-bar");
 // Elements for sensor readings
 const tempElement = document.getElementById("temp");  // tempElement CONTEM O ELEMENTO COM id="temp" em HTML  
 const humElement = document.getElementById("hum");
+const tempElement2 = document.getElementById("temp2");  // tempElement CONTEM O ELEMENTO COM id="temp" em HTML  
+const humElement2 = document.getElementById("hum2");
 const ledIluminacaoElement = document.getElementById("led-indicator-iluminacao");
 const ledTemperaturaElement = document.getElementById("led-indicator-temperatura");
 const ledUmidadeElement = document.getElementById("led-indicator-umidade");
 const ledVentilacaoElement = document.getElementById("led-indicator-ventilacao");
 const ledIrrigacaoElement = document.getElementById("led-indicator-irrigacao");
-const tempElement02 = document.getElementById("temp02");  // tempElement CONTEM O ELEMENTO COM id="temp" em HTML  
-const humElement02 = document.getElementById("hum02");
 const ajusIluminLigaElement = document.getElementById("ligar-value");
 const ajusIluminLigaInputElement = document.getElementById("ligar");
 const ajusIluminLigaMinElement = document.getElementById("ligar-value-min");
@@ -84,6 +90,7 @@ var dbPath13;
 var dbPath14;
 var dbPath15;
 var dbPath16;
+
 //var dbPathLed;
 
 // MANAGE LOGIN/LOGOUT UI     -ESTUDAR
@@ -106,13 +113,13 @@ const setupUI = (user) => {
     // Database paths (with user email prefix and UID)
     var dbPathTemp = `${emailPrefix}/${uid.toString()}/temperature/temperature`;
     var dbPathHum = `${emailPrefix}/${uid.toString()}/humidity/humidity`;
+    var dbPathTemp2 = `${emailPrefix}/${uid.toString()}/temperature2/temperature2`;
+    var dbPathHum2 = `${emailPrefix}/${uid.toString()}/humidity2/humidity2`;
     var dbPathStatusLedIluminacao = `${emailPrefix}/${uid.toString()}/statusLedIluminacao/status`;
     var dbPathStatusLedTemperatura = `${emailPrefix}/${uid.toString()}/statusLedTemperatura/status`;
     var dbPathStatusLedUmidade = `${emailPrefix}/${uid.toString()}/statusLedUmidade/status`;
     var dbPathStatusLedVentilacao = `${emailPrefix}/${uid.toString()}/statusLedVentilacao/status`;
     var dbPathStatusLedIrrigacao = `${emailPrefix}/${uid.toString()}/statusLedIrrigacao/status`;
-    var dbPathTemp02 = `${emailPrefix}/${uid.toString()}/temperature02`;
-    var dbPathHum02 = `${emailPrefix}/${uid.toString()}/humidity02`;
     dbPathOn = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoLiga`;
     dbPathOff = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoDesliga`;
     dbPath01 = `${emailPrefix}/${uid.toString()}/ajusteTemperatura`;
@@ -132,18 +139,16 @@ const setupUI = (user) => {
     dbPath15 = `${emailPrefix}/${uid.toString()}/ajusteUmidadeHisterese`;
     dbPath16 = `${emailPrefix}/${uid.toString()}/ajusteUmidadeOffset`;
 
-    //dbPathLed = 'UsersData/' + uid.toString() + '/led';
-
     // Database references
     var dbRefTemp = firebase.database().ref().child(dbPathTemp);
     var dbRefHum = firebase.database().ref().child(dbPathHum);
+    var dbRefTemp2 = firebase.database().ref().child(dbPathTemp2);
+    var dbRefHum2 = firebase.database().ref().child(dbPathHum2);
     var dbRefStatusLedIluminacao = firebase.database().ref().child(dbPathStatusLedIluminacao);
     var dbRefStatusLedTemperatura = firebase.database().ref().child(dbPathStatusLedTemperatura);
     var dbRefStatusLedUmidade = firebase.database().ref().child(dbPathStatusLedUmidade);
     var dbRefStatusLedVentilacao = firebase.database().ref().child(dbPathStatusLedVentilacao);
     var dbRefStatusLedIrrigacao = firebase.database().ref().child(dbPathStatusLedIrrigacao);
-    var dbRefTemp02 = firebase.database().ref().child(dbPathTemp02);
-    var dbRefHum02 = firebase.database().ref().child(dbPathHum02);
     var dbRefdbPathOn = firebase.database().ref().child(dbPathOn);
     var dbRefdbPathOff = firebase.database().ref().child(dbPathOff);
     var dbRefdbPath01 = firebase.database().ref().child(dbPath01);
@@ -664,51 +669,83 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
 });
 
 
-//-------------------------------------------------------------------------------------------
-    dbRefTemp.on('value', snap => {
+//---------------------------------GRAFICOS----------------------------------------------------------
+// Variáveis globais para armazenar os valores mais recentes
+function getBrasiliaTime() {
+  var now = new Date();
+  now.setUTCHours(now.getUTCHours() - 3); // Ajusta para UTC-3 (Brasília)
+  return now.getTime();
+}
 
-      tempElement.innerText = snap.val().toFixed(1);
-      var x = (new Date()).getTime(),
-      y= parseFloat(snap.val().toFixed(1));
+function updateChart() {
+  var x = getBrasiliaTime(); // Tempo atual ajustado para Brasília
 
-      //y = parseFloat(this.responseText);
-      //console.log(this.responseText);
-      
-      if(chartT.series[0].data.length > 10000) {
-        chartT.series[0].addPoint([x, y], true, true, true);
-      } else {
-        chartT.series[0].addPoint([x, y], true, false, true);
-      }
+  if (tempInt !== null) {
+    chartT.series[0].addPoint([x, tempInt], true, false, true);
+  }
 
-    });
-    dbRefHum.on('value', snap => {
-      humElement.innerText = snap.val().toFixed(1);
-      var x = (new Date()).getTime(),
-      y= parseFloat(snap.val().toFixed(1));
+  if (tempExt !== null) {
+    chartT.series[1].addPoint([x, tempExt], true, false, true);
+  }
 
-      //y = parseFloat(this.responseText);
-      //console.log(this.responseText);
-      
-      if(chartH.series[0].data.length > 10000) {
-        chartH.series[0].addPoint([x, y], true, true, true);
-      } else {
-        chartH.series[0].addPoint([x, y], true, false, true);
-      }
+  if (humidityInt !== null) {
+    chartH.series[0].addPoint([x, humidityInt], true, false, true);
+  }
 
-    });
-    dbRefStatusLedIluminacao.on('value', snap => {
-      const ledState = snap.val();
-     
-      
-      const ledIndicator = document.getElementById("led-indicator-iluminacao");
-      if (ledState === 1) {
-          ledIndicator.classList.add('on');
-          ledIndicator.classList.remove('off');
-      } else {
-          ledIndicator.classList.add('off');
-          ledIndicator.classList.remove('on');
-      }
-    });
+  if (humidityExt !== null) {
+    chartH.series[1].addPoint([x, humidityExt], true, false, true);
+  }
+
+  if (ledStateIluminacao !== null) {
+    chartT.series[2].addPoint([x, ledStateIluminacao], true, false, true);
+  }
+}
+
+dbRefTemp.on('value', snap => {
+  tempInt = parseFloat(snap.val().toFixed(1));
+  tempElement.innerText = tempInt;
+  updateChart(); // Chama a função para atualizar o gráfico
+});
+
+dbRefTemp2.on('value', snap => {
+  tempExt = parseFloat(snap.val().toFixed(1));
+  tempElement2.innerText = tempExt;
+  updateChart(); // Chama a função para atualizar o gráfico
+});
+
+dbRefHum.on('value', snap => {
+  humidityInt = parseFloat(snap.val().toFixed(1));
+  humElement.innerText = humidityInt;
+  updateChart(); // Chama a função para atualizar o gráfico
+});
+
+dbRefHum2.on('value', snap => {
+  humidityExt = parseFloat(snap.val().toFixed(1));
+  humElement2.innerText = humidityExt;
+  updateChart(); // Chama a função para atualizar o gráfico
+});
+
+dbRefStatusLedIluminacao.on('value', snap => {
+  ledStateIluminacao = snap.val();
+
+  // Atualiza o estado do LED no DOM
+  const ledIndicator = document.getElementById("led-indicator-iluminacao");
+  if (ledStateIluminacao === 1) {
+    ledIndicator.classList.add('on');
+    ledIndicator.classList.remove('off');
+  } else {
+    ledIndicator.classList.add('off');
+    ledIndicator.classList.remove('on');
+  }
+
+  updateChart(); // Chama a função para atualizar o gráfico
+});
+
+
+
+    //--------------------------STATUS LED-----------------------------------------------------
+
+    
     dbRefStatusLedTemperatura.on('value', snap => {
       const ledState = snap.val();
      
@@ -771,25 +808,7 @@ document.querySelectorAll('.lock-icon').forEach(lock => {
     contentElement.style.display = 'none';
   }  
 
-  dbRefTemp02.on('value', snap => {
-
-    tempElement02.innerText = snap.val().toFixed(2);
-    var w = (new Date()).getTime(),
-    z = parseFloat(snap.val().toFixed(2));
-
-    //y = parseFloat(this.responseText);
-    //console.log(this.responseText);
-    
-    if(chartT.series[0].data.length > 40) {
-      chartT.series[0].addPoint([w, z], true, true, true);
-    } else {
-      chartT.series[0].addPoint([w, z], true, false, true);
-    }
-
-  });
-  dbRefHum02.on('value', snap => {
-    humElement02.innerText = snap.val().toFixed(2);
-  });
+  
 // if user is logged out
 } 
 

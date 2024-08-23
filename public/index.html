@@ -94,7 +94,8 @@
         <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
         <h1><i class="fas fa-thermometer-half" style="color:#000000;"></i> Temperatura <i class="fas fa-thermometer-half" style="color:#000000;"></i></h1>
         <label> <span class="led" id="led-indicator-temperatura"></span></label>
-        <h2><span class="reading">Atual: <span id="temp"></span> &deg;C</span></h2>
+        <h2><span class="reading">Interna: <span id="temp"></span> &deg;C</span></h2>
+        <h2><span class="reading">Externa: <span id="temp2"></span> &deg;C</span></h2>
         <p1><i class="fa-solid fa-wrench"></i></p1>
         <p><span class="reading01">Setpoint: <span id="tempAdjus"></span> &deg;C</span></p>
         <input type="range" min="16" max="40" class="temp-slider" id="temp-slider" disabled>          
@@ -109,7 +110,8 @@
           <i class="fa-solid fa-lock lock-icon" id="lock-umidade"></i>
           <h1><i class="fas fa-tint" style="color:#000000;"></i> Umidade <i class="fas fa-tint" style="color:#000000;"></i></h1>
           <label> <span class="led" id="led-indicator-umidade"></span></label>
-          <h2><span class="reading">Atual: <span id="hum"></span> &percnt;</span></h2>
+          <h2><span class="reading">Interna: <span id="hum"></span> &percnt;</span></h2>
+          <h2><span class="reading">Externa: <span id="hum2"></span> &percnt;</span></h2>
           <p1><i class="fa-solid fa-wrench"></i> </p1>
           <p><span class="reading01">Setpoint: <span id="umidadeAdjust"></span> %</span></p>
           <input type="range" min="0" max="100" class="temp-slider" id="temp-slider-umidade" disabled>
@@ -125,11 +127,11 @@
           <h1><i class="fa-solid fa-wind" style="color: #000000;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #000000;"></i></h1>
           <label> <span class="led" id="led-indicator-ventilacao"></span></label>
           <h2>Ciclo/dia: <span id="horas-ligado-ventilacao"></span></h2>          
-          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoAdjustLiga"></span> min</span></p>
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoAdjustLiga"></span> s</span></p>
           <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-liga" disabled>
           <p1></p1>
-          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoAdjustDesliga"></span> min</span></p>
-          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoAdjustDesliga"></span> m</span></p>
+          <input type="range" min="0" max="300" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
       </div>
 
       <!-- CARD DE ILUMINAÇÃO -->
