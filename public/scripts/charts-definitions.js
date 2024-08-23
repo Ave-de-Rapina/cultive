@@ -78,7 +78,7 @@ function createTemperatureChart() {
         },
         labels: {
           align: 'left', // Alinha os rótulos do eixo Y à esquerda
-          x: -20, // Ajusta a posição das etiquetas mais perto da margem, mas fora do gráfico
+          x: -23, // Ajusta a posição das etiquetas mais perto da margem, mas fora do gráfico
           formatter: function() {
             return this.value.toFixed(1) + '°';
           },
@@ -86,7 +86,7 @@ function createTemperatureChart() {
             fontSize: '10px' // Tamanho da fonte dos rótulos do eixo Y
           }
         },
-        tickInterval: 0.1, // Define o intervalo entre os ticks, evitando repetições
+        tickInterval: 1, // Define o intervalo entre os ticks, evitando repetições
         tickPixelInterval: 40, // Intervalo entre as marcas do eixo Y
       },
       {
