@@ -17,14 +17,14 @@ function createTemperatureChart() {
     series: [
       {
         name: 'Temperatura int',
-        color: 'red'
+        color: '#8B0000', // Vermelho escuro
       },
       {
         name: 'Temperatura ext',
-        color: 'blue'
+        color: '#FF6347', // Vermelho claro
       },
       {
-        name: 'Estado das Saídas',
+        name: 'Iluminação',
         color: 'orange',
         yAxis: 1 // Usando um eixo Y secundário para o LED
       },
@@ -139,7 +139,7 @@ function createHumidityChart() {
         data: [] // Inicializa com um array vazio
       },
       {
-        name: 'Estado das Saídas',
+        name: 'Iluminação',
         color: 'orange',
         yAxis: 1, // Usando um eixo Y secundário para o LED
         data: [] // Inicializa com um array vazio

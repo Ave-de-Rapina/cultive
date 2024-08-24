@@ -17,6 +17,7 @@ const tempElement = document.getElementById("temp");  // tempElement CONTEM O EL
 const humElement = document.getElementById("hum");
 const tempElement2 = document.getElementById("temp2");  // tempElement CONTEM O ELEMENTO COM id="temp" em HTML  
 const humElement2 = document.getElementById("hum2");
+const notificationsContainer = document.getElementById("notifications-container");
 const ledIluminacaoElement = document.getElementById("led-indicator-iluminacao");
 const ledTemperaturaElement = document.getElementById("led-indicator-temperatura");
 const ledUmidadeElement = document.getElementById("led-indicator-umidade");
@@ -39,7 +40,7 @@ const ajusTemperaturaOffsetInputElement = document.getElementById("temp-slider-t
 
 const ajusUmidadeElement = document.getElementById("umidadeAdjust");
 const ajusUmidadeInputElement = document.getElementById("temp-slider-umidade");
-const ajusUmidadeHistereseElement = document.getElementById("umidadeHistereseAdjust");
+const ajusUmidadeHistereseElement = document.getElementById("umidadeHistereseAdjus");
 const ajusUmidadeHistereseInputElement = document.getElementById("temp-slider-umidade-histerese");
 const ajusUmidadeOffsetElement = document.getElementById("umidadeOffsetAdjus");
 const ajusUmidadeOffsetInputElement = document.getElementById("temp-slider-umidade-offset");
@@ -117,6 +118,7 @@ const setupUI = (user) => {
     var dbPathHum = `${emailPrefix}/${uid.toString()}/humidity/humidity`;
     var dbPathTemp2 = `${emailPrefix}/${uid.toString()}/temperature2/temperature2`;
     var dbPathHum2 = `${emailPrefix}/${uid.toString()}/humidity2/humidity2`;
+    var dbPathCodigoErro = `${emailPrefix}/${uid.toString()}/codigoErro/codigoErro`;
     var dbPathStatusLedIluminacao = `${emailPrefix}/${uid.toString()}/statusLedIluminacao/status`;
     var dbPathStatusLedTemperatura = `${emailPrefix}/${uid.toString()}/statusLedTemperatura/status`;
     var dbPathStatusLedUmidade = `${emailPrefix}/${uid.toString()}/statusLedUmidade/status`;
@@ -146,6 +148,7 @@ const setupUI = (user) => {
     var dbRefHum = firebase.database().ref().child(dbPathHum);
     var dbRefTemp2 = firebase.database().ref().child(dbPathTemp2);
     var dbRefHum2 = firebase.database().ref().child(dbPathHum2);
+    var dbRefCodigoErro = firebase.database().ref().child(dbPathCodigoErro);
     var dbRefStatusLedIluminacao = firebase.database().ref().child(dbPathStatusLedIluminacao);
     var dbRefStatusLedTemperatura = firebase.database().ref().child(dbPathStatusLedTemperatura);
     var dbRefStatusLedUmidade = firebase.database().ref().child(dbPathStatusLedUmidade);
@@ -799,12 +802,162 @@ dbRefStatusLedIrrigacao.on('value', snap => {
     ledIndicator.classList.add('off');
     ledIndicator.classList.remove('on');
   }
-
   updateChart(); // Chama a função para atualizar os gráficos
 });
 
 
-    //--------------------------STATUS LED-----------------------------------------------------
+//---------------------------CÓDIGO DE ERRO--------------------------------
+
+let lastCodigoErro = null; // Variável para armazenar o último código de erro
+
+// Função para adicionar uma nova notificação
+function addNotification(message, type) {
+  const timestamp = new Date();
+  const timeString = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+  // Criar o elemento de notificação
+  const notification = document.createElement('p');
+  notification.className = `notification ${type}`;
+  notification.textContent = `${timeString} - ${message}`;
+
+  // Adicionar a nova notificação no topo do contêiner
+  notificationsContainer.prepend(notification);
+
+  // Limitar o número de notificações a 10
+  if (notificationsContainer.childElementCount > 10) {
+    notificationsContainer.removeChild(notificationsContainer.lastChild);
+  }
+}
+
+// Monitorar mudanças no codigoErro no Firebase
+dbRefCodigoErro.on('value', snap => {
+  const codigoErroInt = parseInt(snap.val(), 10);
+
+  // Verificar se o novo código de erro é diferente do último
+  if (codigoErroInt !== lastCodigoErro) {
+    // Atualizar o último código de erro
+    lastCodigoErro = codigoErroInt;
+
+    // Determinar a mensagem e o tipo de notificação com base no codigoErroInt
+    let message = '';
+    let type = '';
+
+    //---------------------------------MENSAGENS DE NOTIFICAÇÃO-----------------------------
+
+    if (codigoErroInt >= 0 && codigoErroInt < 10) {
+      switch (codigoErroInt) {
+          case 0:
+              message = "Tudo limpo por aqui! A única coisa que falhou foi minha dieta.";
+              break;
+          case 1:
+              message = "Tudo em ordem! Mais suave que passar manteiga no pão.";
+              break;
+          case 2:
+              message = "Sucesso total! Pode relaxar, nada queimar hoje.";
+              break;
+          case 3:
+              message = "Está tudo bem! Até as plantas estão dançando.";
+              break;
+          case 4:
+              message = "Tudo funcionando! Nem o Wi-Fi é tão estável.";
+              break;
+          case 5:
+              message = "Sucesso! Agora você pode contar isso no churrasco.";
+              break;
+          case 6:
+              message = "Missão cumprida! Nem um mosquito saiu ileso.";
+              break;
+          case 7:
+              message = "Tudo certo! Até o gato aprovou.";
+              break;
+          case 8:
+              message = "Operação concluída! Sem dramas por aqui.";
+              break;
+          case 9:
+              message = "Tudo em cima! Mais tranquilo que dia de férias.";
+              break;
+      }
+      type = 'green';
+  } else if (codigoErroInt >= 10 && codigoErroInt < 20) {
+      switch (codigoErroInt) {
+          case 10:
+              message = "Hmmm... algo não cheira bem, e não é o queijo no seu sanduíche.";
+              break;
+          case 11:
+              message = "Atenção: Algo piscou mais do que devia, e não foram as estrelas.";
+              break;
+          case 12:
+              message = "Verifique o sistema! Não é uma pane geral, mas vale a pena conferir.";
+              break;
+          case 13:
+              message = "Atenção! Um parafuso parece estar meio solto.";
+              break;
+          case 14:
+              message = "Alerta: Algo quer chamar sua atenção, e não é a geladeira vazia.";
+              break;
+          case 15:
+              message = "Verifique! Não é apocalíptico, mas pode ser estranho.";
+              break;
+          case 16:
+              message = "Atenção: Um grãozinho de areia apareceu na engrenagem.";
+              break;
+          case 17:
+              message = "Algo está fora de sintonia, mas não é a sua playlist.";
+              break;
+          case 18:
+              message = "Verifique o sistema, antes que ele peça café.";
+              break;
+          case 19:
+              message = "Atenção! Pode ser só um soluço tecnológico.";
+              break;
+      }
+      type = 'yellow';
+  } else if (codigoErroInt >= 20 && codigoErroInt < 30) {
+      switch (codigoErroInt) {
+          case 20:
+              message = "Alerta vermelho! É como esquecer a pizza no forno por muito tempo... só que pior!";
+              break;
+          case 21:
+              message = "Erro crítico! O sistema quer atenção e não vai aceitar um não como resposta.";
+              break;
+          case 22:
+              message = "Alerta! A situação é mais urgente que aquele email de spam.";
+              break;
+          case 23:
+              message = "Erro! Algo deu ruim, e não foi só a previsão do tempo.";
+              break;
+          case 24:
+              message = "Alerta! O sistema quer que você faça algo, tipo agora!";
+              break;
+          case 25:
+              message = "Erro crítico! Melhor resolver antes que fique pior que sua última reunião.";
+              break;
+          case 26:
+              message = "Ação necessária! Isso aqui tá mais tenso que filme de terror.";
+              break;
+          case 27:
+              message = "Erro! Melhor consertar antes que vire novela mexicana.";
+              break;
+          case 28:
+              message = "Alerta crítico! O sistema está mais temperamental que segunda-feira.";
+              break;
+          case 29:
+              message = "Erro! Hora de entrar em ação, tipo super-herói, mas sem a capa.";
+              break;
+      }
+      type = 'red';
+  }
+  
+
+    // Adicionar notificação apenas se a mensagem foi definida
+    if (message) {
+      addNotification(message, type);
+    }
+  }
+});
+
+
+//--------------------------STATUS LED-----------------------------------------------------
     
     dbRefStatusLedTemperatura.on('value', snap => {
       const ledState = snap.val();
@@ -831,33 +984,7 @@ dbRefStatusLedIrrigacao.on('value', snap => {
           ledIndicator.classList.add('off');
           ledIndicator.classList.remove('on');
       }
-    });
-    dbRefStatusLedVentilacao.on('value', snap => {
-      const ledState = snap.val();
-     
-      
-      const ledIndicator = document.getElementById("led-indicator-ventilacao");
-      if (ledState === 1) {
-          ledIndicator.classList.add('on');
-          ledIndicator.classList.remove('off');
-      } else {
-          ledIndicator.classList.add('off');
-          ledIndicator.classList.remove('on');
-      }
-    });
-    dbRefStatusLedIrrigacao.on('value', snap => {
-      const ledState = snap.val();
-     
-      
-      const ledIndicator = document.getElementById("led-indicator-irrigacao");
-      if (ledState === 1) {
-          ledIndicator.classList.add('on');
-          ledIndicator.classList.remove('off');
-      } else {
-          ledIndicator.classList.add('off');
-          ledIndicator.classList.remove('on');
-      }
-    });
+    });     
 
   // if user is logged out
   } else{

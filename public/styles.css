@@ -97,15 +97,19 @@ body {
 }
 
 /* Estilo para o card de notificações */
+/* Certifique-se de que o contêiner de notificações pode rolar se necessário */
 .notifications-card {
     background-color: #fff9f3;
     border-radius: 10px;
     box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
     padding: 10px;
-    margin: 0px 10px;
+    margin: 10px;
     max-width: 600px;
+    max-height: 350px; /* Limita a altura do card */
+    overflow-y: auto;  /* Adiciona barra de rolagem se o conteúdo exceder a altura */
 }
 
+/* Estilo do título */
 .notifications-card h2 {
     font-size: 20px;
     margin-bottom: 15px;
@@ -113,44 +117,45 @@ body {
     text-align: left;
 }
 
+/* Estilo para garantir que as notificações não fiquem sobrepostas */
 .notification {
     font-size: 12px;
     color: #1b1b1b;
     text-align: left;
-    padding: 5px;
-    margin: 0;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 4px;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word; /* Garante que longos textos sejam quebrados e não causem problemas */
 }
 
-.notification:nth-child(odd) {
-    background-color: #9aff9a7e; /* Fundo verde claro */
-}
-
-.notification:nth-child(even):not(.notification:nth-child(3)):not(.notification:nth-child(5)) {
+/* Notificações de tipos diferentes */
+.notification.green {
     background-color: #9cfd9c81; /* Fundo verde claro */
 }
 
-.notification:nth-child(8) {
-    background-color: #ffd6d6; /* Fundo vermelho claro */
-    animation: blinkRed1 1.5s infinite;
-}
-
-.notification:nth-child(5) {
+.notification.yellow {
     background-color: #fff59a; /* Fundo amarelo claro */
     animation: blinkYellow 1.5s infinite;
 }
 
-@keyframes blinkRed1 {
-    0% { background-color: #fbdede; }
-    50% { background-color: #ffeaea; }
-    100% { background-color: #ffd6d6; }
+.notification.red {
+    background-color: #ffd6d6; /* Fundo vermelho claro */
+    animation: blinkRed1 1.5s infinite;
 }
 
+/* Animação de piscar para notificações amarelas */
 @keyframes blinkYellow {
     0% { background-color: #fffacc; }
     50% { background-color: #fffedd; }
     100% { background-color: #fffacc; }
+}
+
+/* Animação de piscar para notificações vermelhas */
+@keyframes blinkRed1 {
+    0% { background-color: #fbdede; }
+    50% { background-color: #ffeaea; }
+    100% { background-color: #ffd6d6; }
 }
 
 

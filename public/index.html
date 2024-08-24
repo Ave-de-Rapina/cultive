@@ -77,17 +77,12 @@
     <div class="cards">
 
       <!-- CARD NOTIFICAÇÃO -->
-  <div class="card notifications-card">
-    <h1><i class="fa-solid fa-bell"></i> Notificações <i class="fa-solid fa-bell"></i></h1>
-    <p class="notification">07:05 - Irrigação concluida.</p>
-    <p class="notification">07:00 - Iniciado sistema de irrigação...</p>
-    <p class="notification">06:15 - Iluminação acionada...</p>
-    <p class="notification">18:43 - Varedura do sistema completa.</p>
-    <p class="notification">22:31 - Sistema reiniciado com sucesso.</p>
-    <p class="notification">22:31 - Dados recuperados com sucesso.</p>
-    <p class="notification">22:30 - Houve uma queda de energia!</p>
-    <p class="notification">23:05 - Alterado tempo de acionamento ventilação</p>    
-</div>
+      <div class="card notifications-card">
+        <h2><i class="fa-solid fa-bell"></i> Notificações <i class="fa-solid fa-bell"></i></h2>
+        <div id="notifications-container"></div>
+
+      </div>
+      
 
       <!-- CARD TEMPERATURA -->
       <div class="card">
@@ -128,10 +123,10 @@
           <label> <span class="led" id="led-indicator-ventilacao"></span></label>
           <h2>Ciclo/dia: <span id="horas-ligado-ventilacao"></span></h2>          
           <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoAdjustLiga"></span> s</span></p>
-          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-liga" disabled>
+          <input type="range" min="0" max="300" value="16" class="temp-slider" id="temp-slider-ventilacao-liga" disabled>
           <p1></p1>
           <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoAdjustDesliga"></span> m</span></p>
-          <input type="range" min="0" max="300" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
+          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
       </div>
 
       <!-- CARD DE ILUMINAÇÃO -->
