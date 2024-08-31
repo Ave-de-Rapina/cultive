@@ -114,34 +114,34 @@ const setupUI = (user) => {
     var emailPrefix = user.email.split('@')[0];
 
     // Database paths (with user email prefix and UID)
-    var dbPathTemp = `${emailPrefix}/${uid.toString()}/temperature/temperature`;
-    var dbPathHum = `${emailPrefix}/${uid.toString()}/humidity/humidity`;
-    var dbPathTemp2 = `${emailPrefix}/${uid.toString()}/temperature2/temperature2`;
-    var dbPathHum2 = `${emailPrefix}/${uid.toString()}/humidity2/humidity2`;
-    var dbPathCodigoErro = `${emailPrefix}/${uid.toString()}/codigoErro/codigoErro`;
-    var dbPathStatusLedIluminacao = `${emailPrefix}/${uid.toString()}/statusLedIluminacao/status`;
-    var dbPathStatusLedTemperatura = `${emailPrefix}/${uid.toString()}/statusLedTemperatura/status`;
-    var dbPathStatusLedUmidade = `${emailPrefix}/${uid.toString()}/statusLedUmidade/status`;
-    var dbPathStatusLedVentilacao = `${emailPrefix}/${uid.toString()}/statusLedVentilacao/status`;
-    var dbPathStatusLedIrrigacao = `${emailPrefix}/${uid.toString()}/statusLedIrrigacao/status`;
-    dbPathOn = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoLiga`;
-    dbPathOff = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoDesliga`;
-    dbPath01 = `${emailPrefix}/${uid.toString()}/ajusteTemperatura`;
-    dbPath02 = `${emailPrefix}/${uid.toString()}/ajusteUmidade`;
-    dbPath03 = `${emailPrefix}/${uid.toString()}/ajusteVentilacaoLiga`;
-    dbPath04 = `${emailPrefix}/${uid.toString()}/ajusteVentilacaoDesliga`;
-    dbPath05 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacao`;
-    dbPath06 = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoLigaMin`;
-    dbPath07 = `${emailPrefix}/${uid.toString()}/ajusteIluminacaoDesligaMin`;
-    dbPath08 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacaoHora`;
-    dbPath09 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacaoHora02`;
-    dbPath10 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacao02`;
-    dbPath11 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacaoHora03`;
-    dbPath12 = `${emailPrefix}/${uid.toString()}/ajusteIrrigacao03`;
-    dbPath13 = `${emailPrefix}/${uid.toString()}/ajusteTemperaturaHisterese`;
-    dbPath14 = `${emailPrefix}/${uid.toString()}/ajusteTemperaturaOffset`;
-    dbPath15 = `${emailPrefix}/${uid.toString()}/ajusteUmidadeHisterese`;
-    dbPath16 = `${emailPrefix}/${uid.toString()}/ajusteUmidadeOffset`;
+    var dbPathTemp = `${emailPrefix}/${uid.toString()}/data01/temperature`;
+    var dbPathHum = `${emailPrefix}/${uid.toString()}/data01/humidity`;
+    var dbPathTemp2 = `${emailPrefix}/${uid.toString()}/data01/temperature2`;
+    var dbPathHum2 = `${emailPrefix}/${uid.toString()}/data01/humidity2`;
+    var dbPathCodigoErro = `${emailPrefix}/${uid.toString()}/data01/CodigoErro`;
+    var dbPathStatusLedIluminacao = `${emailPrefix}/${uid.toString()}/data01/statusLedIluminacao`;
+    var dbPathStatusLedTemperatura = `${emailPrefix}/${uid.toString()}/data01/statusLedTemperatura`;
+    var dbPathStatusLedUmidade = `${emailPrefix}/${uid.toString()}/data01/statusLedUmidade`;
+    var dbPathStatusLedVentilacao = `${emailPrefix}/${uid.toString()}/data01/statusLedVentilacao`;
+    var dbPathStatusLedIrrigacao = `${emailPrefix}/${uid.toString()}/data01/statusLedIrrigacao`;
+    dbPathOn = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoLiga`;
+    dbPathOff = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoDesliga`;
+    dbPath01 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperatura`;
+    dbPath02 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteUmidade`;
+    dbPath03 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoLiga`;
+    dbPath04 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoDesliga`;
+    dbPath05 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao`;
+    dbPath06 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoLigaMin`;
+    dbPath07 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoDesligaMin`;
+    dbPath08 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora`;
+    dbPath09 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora02`;
+    dbPath10 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao02`;
+    dbPath11 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora03`;
+    dbPath12 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao03`;
+    dbPath13 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperaturaHisterese`;
+    dbPath14 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperaturaOffset`;
+    dbPath15 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteUmidadeHisterese`;
+    dbPath16 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteUmidadeOffset`;
 
     // Database references
     var dbRefTemp = firebase.database().ref().child(dbPathTemp);
@@ -847,67 +847,73 @@ dbRefCodigoErro.on('value', snap => {
     if (codigoErroInt >= 0 && codigoErroInt < 10) {
       switch (codigoErroInt) {
           case 0:
-              message = "Tudo limpo por aqui! A única coisa que falhou foi minha dieta.";
+              message = "O sistema iniciou, conectou com a rede wifi e com o banco de dados com sucesso";
               break;
           case 1:
-              message = "Tudo em ordem! Mais suave que passar manteiga no pão.";
+              message = "O sistema de ventilação foi acionado, ar fresco para suas plantas.";
               break;
           case 2:
-              message = "Sucesso total! Pode relaxar, nada queimar hoje.";
+              message = "O sistema de ventilação foi desligado";
               break;
           case 3:
-              message = "Está tudo bem! Até as plantas estão dançando.";
+              message = "O sistema de iluminação foi acionado, faça-se a luz!";
               break;
           case 4:
-              message = "Tudo funcionando! Nem o Wi-Fi é tão estável.";
+              message = "O sistema de iluminação foi desligado, a escuridão toma conta do ambiente";
               break;
           case 5:
-              message = "Sucesso! Agora você pode contar isso no churrasco.";
+              message = "O sistema desumidificador foi acionado, logo sua umidade será equalizada.";
               break;
           case 6:
-              message = "Missão cumprida! Nem um mosquito saiu ileso.";
+              message = "O sistema desumidificador foi desligado, a umidade se encontra desntro da faixa estipulada.";
               break;
           case 7:
-              message = "Tudo certo! Até o gato aprovou.";
+              message = "O sistema de aquecimento foi acionado, parece que esfriou por aqui.";
               break;
           case 8:
-              message = "Operação concluída! Sem dramas por aqui.";
+              message = "O sistema de aquecimento foi desligado, a temperatura está ok.";
               break;
           case 9:
-              message = "Tudo em cima! Mais tranquilo que dia de férias.";
+              message = "É hora de atualizar a a data e hora do sistema com o servidor";
+              break;
+          case 10:
+              message = "A hora foi atualizada com sucesso!";
+              break;
+          case 10:
+              message = "O ";
               break;
       }
       type = 'green';
   } else if (codigoErroInt >= 10 && codigoErroInt < 20) {
       switch (codigoErroInt) {
-          case 10:
-              message = "Hmmm... algo não cheira bem, e não é o queijo no seu sanduíche.";
+          case 100:
+              message = "Após 3 tentativas não consegui atualizar a data e hora do sistema com o servidor, mais tarde tentaremos novamente.";
               break;
-          case 11:
+          case 101:
               message = "Atenção: Algo piscou mais do que devia, e não foram as estrelas.";
               break;
-          case 12:
+          case 102:
               message = "Verifique o sistema! Não é uma pane geral, mas vale a pena conferir.";
               break;
-          case 13:
+          case 103:
               message = "Atenção! Um parafuso parece estar meio solto.";
               break;
-          case 14:
+          case 104:
               message = "Alerta: Algo quer chamar sua atenção, e não é a geladeira vazia.";
               break;
-          case 15:
+          case 105:
               message = "Verifique! Não é apocalíptico, mas pode ser estranho.";
               break;
-          case 16:
+          case 106:
               message = "Atenção: Um grãozinho de areia apareceu na engrenagem.";
               break;
-          case 17:
+          case 107:
               message = "Algo está fora de sintonia, mas não é a sua playlist.";
               break;
-          case 18:
+          case 108:
               message = "Verifique o sistema, antes que ele peça café.";
               break;
-          case 19:
+          case 109:
               message = "Atenção! Pode ser só um soluço tecnológico.";
               break;
       }
