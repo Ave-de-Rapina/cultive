@@ -16,11 +16,11 @@ function createTemperatureChart() {
     },
     series: [
       {
-        name: 'Temperatura int',
+        name: 'Temperatura int.',
         color: '#8B0000', // Vermelho escuro
       },
       {
-        name: 'Temperatura ext',
+        name: 'Temperatura ext.',
         color: '#FF6347', // Vermelho claro
       },
       {
@@ -29,12 +29,12 @@ function createTemperatureChart() {
         yAxis: 1 // Usando um eixo Y secundário para o LED
       },
       {
-        name: 'Ventilação',
+        name: 'Ventilação ext.',
         color: 'green',
         yAxis: 1 // Usando o mesmo eixo Y secundário
       },
       {
-        name: 'Irrigação',
+        name: 'Ventilação int.',
         color: 'purple',
         yAxis: 1 // Usando o mesmo eixo Y secundário
       }
@@ -129,12 +129,12 @@ function createHumidityChart() {
     },
     series: [
       {
-        name: 'Umidade int',
+        name: 'Umidade int.',
         color: '#00008B', // Azul escuro
         data: [] // Inicializa com um array vazio
       },
       {
-        name: 'Umidade ext',
+        name: 'Umidade ext.',
         color: '#87CEFA', // Azul claro
         data: [] // Inicializa com um array vazio
       },
@@ -145,13 +145,13 @@ function createHumidityChart() {
         data: [] // Inicializa com um array vazio
       },
       {
-        name: 'Ventilação',
+        name: 'Ventilação ext.',
         color: 'green',
         yAxis: 1, // Usando o mesmo eixo Y secundário
         data: [] // Inicializa com um array vazio
       },
       {
-        name: 'Irrigação',
+        name: 'Ventilação int.',
         color: 'purple',
         yAxis: 1, // Usando o mesmo eixo Y secundário
         data: [] // Inicializa com um array vazio

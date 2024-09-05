@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var slider = document.getElementById("temp-slider-ventilacao-liga");
-    var output = document.getElementById("ventilacaoAdjustLiga");
+    var slider = document.getElementById("temp-slider-ventilacao-externa-liga");
+    var output = document.getElementById("ventilacaoExternaAdjustLiga");
     output.innerHTML = slider.value;
 
     slider.oninput = function() {
@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Update temperature value in Firebase
         firebase.database().ref(dbPath03).set({
-            ventilacaoAjusteLiga: output.innerHTML
+            ventilacaoExternaAjusteLiga: output.innerHTML
           });
     };
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-    var slider = document.getElementById("temp-slider-ventilacao-desliga");
-    var output = document.getElementById("ventilacaoAdjustDesliga");
+    var slider = document.getElementById("temp-slider-ventilacao-externa-desliga");
+    var output = document.getElementById("ventilacaoExternaAdjustDesliga");
     output.innerHTML = slider.value;
 
     slider.oninput = function() {
@@ -25,19 +25,19 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Update temperature value in Firebase
         firebase.database().ref(dbPath04).set({
-            ventilacaoAjusteDesliga: output.innerHTML
+            ventilacaoExternaAjusteDesliga: output.innerHTML
           });
     };
 })
 
-//----------------------------ILUMINACAO LIGA--------------------------------------
+//----------------------------VENTILACAO LIGA--------------------------------------
 
 document.addEventListener('DOMContentLoaded', function () {
-    const sliderLiga = document.getElementById('temp-slider-ventilacao-liga');
-    const sliderDesliga = document.getElementById('temp-slider-ventilacao-desliga');
-    const horasLigadoVentilacaoElement = document.getElementById('horas-ligado-ventilacao');
-    const ventilacaoAdjustLiga = document.getElementById('ventilacaoAdjustLiga');
-    const ventilacaoAdjustDesliga = document.getElementById('ventilacaoAdjustDesliga');
+    const sliderLiga = document.getElementById('temp-slider-ventilacao-externa-liga');
+    const sliderDesliga = document.getElementById('temp-slider-ventilacao-externa-desliga');
+    const horasLigadoVentilacaoExternaElement = document.getElementById('horas-ligado-ventilacao-externa');
+    const ventilacaoExternaAdjustLiga = document.getElementById('ventilacaoExternaAdjustLiga');
+    const ventilacaoExternaAdjustDesliga = document.getElementById('ventilacaoExternaAdjustDesliga');
 
     function updateCiclosPorDia() {
         const tempoLiga = parseInt(sliderLiga.value, 10);
@@ -47,12 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const ciclosPorDia = (1440 / tempoTotalCiclo).toFixed(2);
 
-        horasLigadoVentilacaoElement.textContent = ciclosPorDia;
+        horasLigadoVentilacaoExternaElement.textContent = ciclosPorDia;
     }
 
     function updateSliderValues() {
-        ventilacaoAdjustLiga.textContent = sliderLiga.value;
-        ventilacaoAdjustDesliga.textContent = sliderDesliga.value;
+        ventilacaoExternaAdjustLiga.textContent = sliderLiga.value;
+        ventilacaoExternaAdjustDesliga.textContent = sliderDesliga.value;
     }
 
     sliderLiga.addEventListener('input', () => {
