@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 })
 
-
 document.addEventListener("DOMContentLoaded", function() {
     var slider = document.getElementById("temp-slider-temperatura-histerese");
     var output = document.getElementById("tempAdjusHisterese");
