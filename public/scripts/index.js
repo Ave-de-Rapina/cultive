@@ -168,7 +168,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-exports.saveToStorage = functions.database.ref('${emailPrefix}/${uid.toString()}')
+exports.saveToStorage = functions.database.ref('${emailPrefix}/${uid.toString()}/data01')
     .onWrite((change, context) => {
         // Obtenha os dados atualizados
         const data = change.after.val();
@@ -440,10 +440,40 @@ dbRefCodigoErro.on('value', snap => {
           case 10:
               message = "A hora foi atualizada com sucesso!";
               break;
-          case 10:
+          case 11:
+              message = "Sincronizando com o servidor NTP...";
+              break;
+          case 12:
+              message = "-----------";
+              break;
+          case 13:
+              message = "-----------";
+              break;
+          case 14:
               message = "------------";
               break;
-          case 11:
+          case 15:
+              message = "-----------";
+              break;
+          case 16:
+              message = "-----------";
+              break;
+          case 17:
+              message = "------------";
+              break;
+          case 18:
+              message = "-----------";
+              break;
+          case 19:
+              message = "-----------";
+              break;
+          case 20:
+              message = "------------";
+              break;
+          case 21:
+              message = "-----------";
+              break;
+          case 22:
               message = "-----------";
               break;
       }
@@ -483,6 +513,12 @@ dbRefCodigoErro.on('value', snap => {
           case 110:
                 message = "Não foi possível sincronizar a hora após várias tentativas, mais tarde será tentado novamente.";
                 break;
+          case 111:
+                message = "Erro: Não foi possível obter a hora local.";
+              break;
+          case 112:
+                message = "Falha ao obter a hora, tentando novamente...";
+              break;
       }
       type = 'yellow';
   } else if (codigoErroInt >= 200 && codigoErroInt < 299) {
@@ -494,7 +530,7 @@ dbRefCodigoErro.on('value', snap => {
               message = "Sensor externo em falha.";
               break;
           case 202:
-              message = "Alerta! A situação é mais urgente que aquele email de spam.";
+              message = "Erro de comunicação com os sensores.";
               break;
           case 203:
               message = "Erro! Algo deu ruim, e não foi só a previsão do tempo.";
