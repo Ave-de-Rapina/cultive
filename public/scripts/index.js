@@ -128,9 +128,9 @@ const setupUI = (user) => {
     dbPathOff = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoDesliga`;
     dbPath01 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperatura`;
     dbPath02 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteUmidade`;
-    dbPath03 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoExternaLiga`;
-    dbPath04 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoExternaDesliga`;
-    dbPath05 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoInternaLiga`;
+    dbPath03 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoLiga`;
+    dbPath04 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoDesliga`;
+    dbPath05 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao`;
     dbPath06 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoLigaMin`;
     dbPath07 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoDesligaMin`;
     dbPath08 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora`;
@@ -443,110 +443,220 @@ ajusUmidadeOffsetInputElement.addEventListener('input', function() {
   dbRefdbPath16.set({ umidadeOffsetAjuste: novoValor });
 });
 
-//------------------------------------VENTILACAO EXTERNA LIGA-------------------------------------------
+//------------------------------------VENTILACAO LIGA-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoExternaLiga(valor) {
-  ajusVentilacaoExternaLigaElement.innerText = valor;
+function atualizarValorElementoVentilacaoLiga(valor) {
+  ajusVentilacaoLigaElement.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoExternaLiga(valor) {
-  ajusVentilacaoExternaLigaInputElement.value = valor;
+function atualizarValorInputVentilacaoLiga(valor) {
+  ajusVentilacaoLigaInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath03.on('value', snap => {
-  var valor = snap.val().ventilacaoExternaAjusteLiga;
+  var valor = snap.val().ventilacaoAjusteLiga;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoExternaLiga(valor);
+  atualizarValorElementoVentilacaoLiga(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoExternaLiga(valor);
+  atualizarValorInputVentilacaoLiga(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoExternaLigaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoExternaLigaInputElement.value;
+ajusVentilacaoLigaInputElement.addEventListener('input', function() {
+  var novoValor = ajusVentilacaoLigaInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath03.set({ ventilacaoExternaAjusteLiga: novoValor });
+  dbRefdbPath03.set({ ventilacaoAjusteLiga: novoValor });
 });
-//------------------------------------VENTILACAO EXTERNA DESLIGA-------------------------------------------
+//------------------------------------VENTILACAO DESLIGA-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoExternaDesliga(valor) {
-  ajusVentilacaoExternaDesligaElement.innerText = valor;
+function atualizarValorElementoVentilacaoDesliga(valor) {
+  ajusVentilacaoDesligaElement.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoExternaDesliga(valor) {
-  ajusVentilacaoExternaDesligaInputElement.value = valor;
+function atualizarValorInputVentilacaoDesliga(valor) {
+  ajusVentilacaoDesligaInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath04.on('value', snap => {
-  var valor = snap.val().ventilacaoExternaAjusteDesliga;
+  var valor = snap.val().ventilacaoAjusteDesliga;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoExternaDesliga(valor);
+  atualizarValorElementoVentilacaoDesliga(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoExternaDesliga(valor);
+  atualizarValorInputVentilacaoDesliga(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoExternaDesligaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoExternaDesligaInputElement.value;
+ajusVentilacaoDesligaInputElement.addEventListener('input', function() {
+  var novoValor = ajusVentilacaoDesligaInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath04.set({ ventilacaoExternaAjusteDesliga: novoValor });
+  dbRefdbPath04.set({ ventilacaoAjusteDesliga: novoValor });
 });
 
-//------------------------------------VENTILACAO INTERNA LIGA-------------------------------------------
+//------------------------------------IRRIGACAO 01 HORA-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoInternaLiga(valor) {
-  ajusVentilacaoInternaLigaElement.innerText = valor;
+function atualizarValorElementoIrrigacao01Hora(valor) {
+  ajusIrrigacao01HoraElement.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoInternaLiga(valor) {
-  ajusVentilacaoInternaLigaInputElement.value = valor;
+function atualizarValorInputIrrigacao01Hora(valor) {
+  ajusIrrigacao01HoraInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath08.on('value', snap => {
-  var valor = snap.val().ventilacaoInternaAjusteLiga;
+  var valor = snap.val().irrigacaoAjusteHora;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoInternaLiga(valor);
+  atualizarValorElementoIrrigacao01Hora(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoInternaLiga(valor);
+ atualizarValorInputIrrigacao01Hora(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoInternaLigaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoInternaLigaInputElement.value;
+ajusIrrigacao01HoraInputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao01HoraInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath05.set({ ventilacaoInternaAjusteLiga: novoValor });
+  dbRefdbPath08.set({ irrigacaoAjusteHora: novoValor });
 });
-//------------------------------------VENTILACAO INTERNA DESLIGA-------------------------------------------
+
+//------------------------------------IRRIGACAO 01 SEGUNDOS-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoInternaDesliga(valor) {
-  ajusVentilacaoInternaDesligaElement.innerText = valor;
+function atualizarValorElementoIrrigacao01(valor) {
+  ajusIrrigacao01Element.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoInternaDesliga(valor) {
-  ajusVentilacaoInternaDesligaInputElement.value = valor;
+function atualizarValorInputIrrigacao01(valor) {
+  ajusIrrigacao01InputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath05.on('value', snap => {
+  var valor = snap.val().irrigacaoAjuste;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao01(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao01(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao01InputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao01InputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath05.set({ irrigacaoAjuste: novoValor });
+});
+
+
+//------------------------------------IRRIGACAO 02 HORA-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao02Hora(valor) {
+  ajusIrrigacao02HoraElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao02Hora(valor) {
+  ajusIrrigacao02HoraInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath09.on('value', snap => {
-  var valor = snap.val().ventilacaoInternaAjusteDesliga;
+  var valor = snap.val().irrigacaoAjusteHora02;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoInternaDesliga(valor);
+  atualizarValorElementoIrrigacao02Hora(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoInternaDesliga(valor);
+ atualizarValorInputIrrigacao02Hora(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoInternaDesligaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoInternaDesligaInputElement.value;
+ajusIrrigacao02HoraInputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao02HoraInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath09.set({ ventilacaoInternaAjusteDesliga: novoValor });
+  dbRefdbPath09.set({ irrigacaoAjusteHora02: novoValor });
+});
+
+//------------------------------------IRRIGACAO 02 SEGUNDOS-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao02(valor) {
+  ajusIrrigacao02Element.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao02(valor) {
+  ajusIrrigacao02InputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath10.on('value', snap => {
+  var valor = snap.val().irrigacaoAjuste02;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao02(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao02(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao02InputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao02InputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath10.set({ irrigacaoAjuste02: novoValor });
+});
+
+//------------------------------------IRRIGACAO 03 HORA-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao03Hora(valor) {
+  ajusIrrigacao03HoraElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao03Hora(valor) {
+  ajusIrrigacao03HoraInputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath11.on('value', snap => {
+  var valor = snap.val().irrigacaoAjusteHora03;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao03Hora(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao03Hora(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao03HoraInputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao03HoraInputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath11.set({ irrigacaoAjusteHora03: novoValor });
+});
+
+//------------------------------------IRRIGACAO 03 SEGUNDOS-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao03(valor) {
+  ajusIrrigacao03Element.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao03(valor) {
+  ajusIrrigacao03InputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath12.on('value', snap => {
+  var valor = snap.val().irrigacaoAjuste03;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao03(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao03(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao03InputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao03InputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath12.set({ irrigacaoAjuste03: novoValor });
 });
 
 //---------------------------LOGICA CADEADO------------------------------------------------------
@@ -695,7 +805,6 @@ dbRefStatusLedIrrigacao.on('value', snap => {
 });
 
 
-
 //---------------------------CÓDIGO DE ERRO--------------------------------
 
 let lastCodigoErro = null; // Variável para armazenar o último código de erro
@@ -713,11 +822,11 @@ function addNotification(message, type) {
   // Adicionar a nova notificação no topo do contêiner
   notificationsContainer.prepend(notification);
 
-    // Limitar o número de notificações a 10
-    if (notificationsContainer.childElementCount > 10) {
-      notificationsContainer.removeChild(notificationsContainer.lastChild);
-    }
+  // Limitar o número de notificações a 10
+  if (notificationsContainer.childElementCount > 10) {
+    notificationsContainer.removeChild(notificationsContainer.lastChild);
   }
+}
 
 // Monitorar mudanças no codigoErro no Firebase
 dbRefCodigoErro.on('value', snap => {
@@ -770,10 +879,7 @@ dbRefCodigoErro.on('value', snap => {
               message = "A hora foi atualizada com sucesso!";
               break;
           case 10:
-              message = "------------";
-              break;
-          case 11:
-              message = "-----------";
+              message = "O ";
               break;
       }
       type = 'green';
@@ -807,11 +913,8 @@ dbRefCodigoErro.on('value', snap => {
               message = "Verifique o sistema, antes que ele peça café.";
               break;
           case 109:
-              message = "Reset over SDIO.";
+              message = "Atenção! Pode ser só um soluço tecnológico.";
               break;
-          case 110:
-                message = "Não foi possível sincronizar a hora após várias tentativas, mais tarde será tentado novamente.";
-                break;
       }
       type = 'yellow';
   } else if (codigoErroInt >= 20 && codigoErroInt < 30) {
@@ -822,7 +925,7 @@ dbRefCodigoErro.on('value', snap => {
           case 21:
               message = "Erro crítico! O sistema quer atenção e não vai aceitar um não como resposta.";
               break;
-          case 202:
+          case 22:
               message = "Alerta! A situação é mais urgente que aquele email de spam.";
               break;
           case 23:

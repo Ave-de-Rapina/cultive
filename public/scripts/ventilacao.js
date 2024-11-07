@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 })
 
-
 document.addEventListener("DOMContentLoaded", function() {
     var slider = document.getElementById("temp-slider-ventilacao-interna-liga");
     var output = document.getElementById("ventilacaoInternaAdjustLiga");
@@ -63,8 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 })
 //----------------------------VENTILACAO LIGA--------------------------------------
-
-//----------------------------ILUMINACAO LIGA--------------------------------------
 
 
 document.addEventListener('DOMContentLoaded', function () {
