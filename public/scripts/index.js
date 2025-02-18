@@ -4,8 +4,8 @@ var tempExt = null;
 var humidityInt = null;
 var humidityExt = null;
 var ledStateIluminacao = null;
-var ledStateVentilacaoExterna = null;
-var ledStateVentilacaoInterna = null;
+var ledStateVentilacao = null;
+var ledStateIrrigacao = null;
 
 const loginElement = document.querySelector('#login-form');
 const contentElement = document.querySelector("#content-sign-in");
@@ -21,8 +21,8 @@ const notificationsContainer = document.getElementById("notifications-container"
 const ledIluminacaoElement = document.getElementById("led-indicator-iluminacao");
 const ledTemperaturaElement = document.getElementById("led-indicator-temperatura");
 const ledUmidadeElement = document.getElementById("led-indicator-umidade");
-const ledVentilacaoExternaElement = document.getElementById("led-indicator-ventilacao-externa");
-const ledVentilacaoInternaElement = document.getElementById("led-indicator-ventilacao-interna");
+const ledVentilacaoElement = document.getElementById("led-indicator-ventilacao");
+const ledIrrigacaoElement = document.getElementById("led-indicator-irrigacao");
 const ajusIluminLigaElement = document.getElementById("ligar-value");
 const ajusIluminLigaInputElement = document.getElementById("ligar");
 const ajusIluminLigaMinElement = document.getElementById("ligar-value-min");
@@ -45,15 +45,24 @@ const ajusUmidadeHistereseInputElement = document.getElementById("temp-slider-um
 const ajusUmidadeOffsetElement = document.getElementById("umidadeOffsetAdjus");
 const ajusUmidadeOffsetInputElement = document.getElementById("temp-slider-umidade-offset");
 
-const ajusVentilacaoExternaLigaElement = document.getElementById("ventilacaoExternaAdjustLiga");
-const ajusVentilacaoExternaLigaInputElement = document.getElementById("temp-slider-ventilacao-externa-liga");
-const ajusVentilacaoExternaDesligaElement = document.getElementById("ventilacaoExternaAdjustDesliga");
-const ajusVentilacaoExternaDesligaInputElement = document.getElementById("temp-slider-ventilacao-externa-desliga");
+const ajusVentilacaoLigaElement = document.getElementById("ventilacaoAdjustLiga");
+const ajusVentilacaoLigaInputElement = document.getElementById("temp-slider-ventilacao-liga");
+const ajusVentilacaoDesligaElement = document.getElementById("ventilacaoAdjustDesliga");
+const ajusVentilacaoDesligaInputElement = document.getElementById("temp-slider-ventilacao-desliga");
+const ajusIrrigacao01HoraElement = document.getElementById("ligar-value-irrigacao");
+const ajusIrrigacao01HoraInputElement = document.getElementById("ligar-irrigacao");
+const ajusIrrigacao01Element = document.getElementById("irrigacaoAdjust");
+const ajusIrrigacao01InputElement = document.getElementById("temp-slider-irrigacao");
 
-const ajusVentilacaoInternaLigaElement = document.getElementById("ventilacaoInternaAdjustLiga");
-const ajusVentilacaoInternaLigaInputElement = document.getElementById("temp-slider-ventilacao-interna-liga");
-const ajusVentilacaoInternaDesligaElement = document.getElementById("ventilacaoInternaAdjustDesliga");
-const ajusVentilacaoInternaDesligaInputElement = document.getElementById("temp-slider-ventilacao-interna-desliga");
+const ajusIrrigacao02HoraElement = document.getElementById("ligar-value-irrigacao02");
+const ajusIrrigacao02HoraInputElement = document.getElementById("ligar-irrigacao02");
+const ajusIrrigacao02Element = document.getElementById("irrigacaoAdjust02");
+const ajusIrrigacao02InputElement = document.getElementById("temp-slider-irrigacao02");
+
+const ajusIrrigacao03HoraElement = document.getElementById("ligar-value-irrigacao03");
+const ajusIrrigacao03HoraInputElement = document.getElementById("ligar-irrigacao03");
+const ajusIrrigacao03Element = document.getElementById("irrigacaoAdjust03");
+const ajusIrrigacao03InputElement = document.getElementById("temp-slider-irrigacao03");
 
 
 //const ledElement = document.getElementById("led");
@@ -77,7 +86,9 @@ var dbPath06;
 var dbPath07;
 var dbPath08;
 var dbPath09;
-
+var dbPath10;
+var dbPath11;
+var dbPath12;
 var dbPath13;
 var dbPath14;
 var dbPath15;
@@ -111,20 +122,22 @@ const setupUI = (user) => {
     var dbPathStatusLedIluminacao = `${emailPrefix}/${uid.toString()}/data01/statusLedIluminacao`;
     var dbPathStatusLedTemperatura = `${emailPrefix}/${uid.toString()}/data01/statusLedTemperatura`;
     var dbPathStatusLedUmidade = `${emailPrefix}/${uid.toString()}/data01/statusLedUmidade`;
-    var dbPathStatusLedVentilacaoExterna = `${emailPrefix}/${uid.toString()}/data01/statusLedVentilacaoExterna`;
-    var dbPathStatusLedVentilacaoInterna = `${emailPrefix}/${uid.toString()}/data01/statusLedVentilacaoInterna`;
+    var dbPathStatusLedVentilacao = `${emailPrefix}/${uid.toString()}/data01/statusLedVentilacao`;
+    var dbPathStatusLedIrrigacao = `${emailPrefix}/${uid.toString()}/data01/statusLedIrrigacao`;
     dbPathOn = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoLiga`;
     dbPathOff = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoDesliga`;
     dbPath01 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperatura`;
     dbPath02 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteUmidade`;
-    dbPath03 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoExternaLiga`;
-    dbPath04 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoExternaDesliga`;
-    dbPath05 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoInternaLiga`;
+    dbPath03 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoLiga`;
+    dbPath04 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoDesliga`;
+    dbPath05 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao`;
     dbPath06 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoLigaMin`;
     dbPath07 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIluminacaoDesligaMin`;
-    dbPath08 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoInternaLiga`;
-    dbPath09 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteVentilacaoInternaDesliga`;
-    
+    dbPath08 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora`;
+    dbPath09 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora02`;
+    dbPath10 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao02`;
+    dbPath11 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacaoHora03`;
+    dbPath12 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteIrrigacao03`;
     dbPath13 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperaturaHisterese`;
     dbPath14 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteTemperaturaOffset`;
     dbPath15 = `${emailPrefix}/${uid.toString()}/ajuste/ajusteUmidadeHisterese`;
@@ -139,8 +152,8 @@ const setupUI = (user) => {
     var dbRefStatusLedIluminacao = firebase.database().ref().child(dbPathStatusLedIluminacao);
     var dbRefStatusLedTemperatura = firebase.database().ref().child(dbPathStatusLedTemperatura);
     var dbRefStatusLedUmidade = firebase.database().ref().child(dbPathStatusLedUmidade);
-    var dbRefStatusLedVentilacaoExterna = firebase.database().ref().child(dbPathStatusLedVentilacaoExterna);
-    var dbRefStatusLedVentilacaoInterna = firebase.database().ref().child(dbPathStatusLedVentilacaoInterna);
+    var dbRefStatusLedVentilacao = firebase.database().ref().child(dbPathStatusLedVentilacao);
+    var dbRefStatusLedIrrigacao = firebase.database().ref().child(dbPathStatusLedIrrigacao);
     var dbRefdbPathOn = firebase.database().ref().child(dbPathOn);
     var dbRefdbPathOff = firebase.database().ref().child(dbPathOff);
     var dbRefdbPath01 = firebase.database().ref().child(dbPath01);
@@ -152,7 +165,9 @@ const setupUI = (user) => {
     var dbRefdbPath07 = firebase.database().ref().child(dbPath07);
     var dbRefdbPath08 = firebase.database().ref().child(dbPath08);
     var dbRefdbPath09 = firebase.database().ref().child(dbPath09);
-    
+    var dbRefdbPath10 = firebase.database().ref().child(dbPath10);
+    var dbRefdbPath11 = firebase.database().ref().child(dbPath11);
+    var dbRefdbPath12 = firebase.database().ref().child(dbPath12);
     var dbRefdbPath13 = firebase.database().ref().child(dbPath13);
     var dbRefdbPath14 = firebase.database().ref().child(dbPath14);
     var dbRefdbPath15 = firebase.database().ref().child(dbPath15);
@@ -427,110 +442,220 @@ ajusUmidadeOffsetInputElement.addEventListener('input', function() {
   dbRefdbPath16.set({ umidadeOffsetAjuste: novoValor });
 });
 
-//------------------------------------VENTILACAO EXTERNA LIGA-------------------------------------------
+//------------------------------------VENTILACAO LIGA-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoExternaLiga(valor) {
-  ajusVentilacaoExternaLigaElement.innerText = valor;
+function atualizarValorElementoVentilacaoLiga(valor) {
+  ajusVentilacaoLigaElement.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoExternaLiga(valor) {
-  ajusVentilacaoExternaLigaInputElement.value = valor;
+function atualizarValorInputVentilacaoLiga(valor) {
+  ajusVentilacaoLigaInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath03.on('value', snap => {
-  var valor = snap.val().ventilacaoExternaAjusteLiga;
+  var valor = snap.val().ventilacaoAjusteLiga;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoExternaLiga(valor);
+  atualizarValorElementoVentilacaoLiga(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoExternaLiga(valor);
+  atualizarValorInputVentilacaoLiga(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoExternaLigaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoExternaLigaInputElement.value;
+ajusVentilacaoLigaInputElement.addEventListener('input', function() {
+  var novoValor = ajusVentilacaoLigaInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath03.set({ ventilacaoExternaAjusteLiga: novoValor });
+  dbRefdbPath03.set({ ventilacaoAjusteLiga: novoValor });
 });
-//------------------------------------VENTILACAO EXTERNA DESLIGA-------------------------------------------
+//------------------------------------VENTILACAO DESLIGA-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoExternaDesliga(valor) {
-  ajusVentilacaoExternaDesligaElement.innerText = valor;
+function atualizarValorElementoVentilacaoDesliga(valor) {
+  ajusVentilacaoDesligaElement.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoExternaDesliga(valor) {
-  ajusVentilacaoExternaDesligaInputElement.value = valor;
+function atualizarValorInputVentilacaoDesliga(valor) {
+  ajusVentilacaoDesligaInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath04.on('value', snap => {
-  var valor = snap.val().ventilacaoExternaAjusteDesliga;
+  var valor = snap.val().ventilacaoAjusteDesliga;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoExternaDesliga(valor);
+  atualizarValorElementoVentilacaoDesliga(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoExternaDesliga(valor);
+  atualizarValorInputVentilacaoDesliga(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoExternaDesligaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoExternaDesligaInputElement.value;
+ajusVentilacaoDesligaInputElement.addEventListener('input', function() {
+  var novoValor = ajusVentilacaoDesligaInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath04.set({ ventilacaoExternaAjusteDesliga: novoValor });
+  dbRefdbPath04.set({ ventilacaoAjusteDesliga: novoValor });
 });
 
-//------------------------------------VENTILACAO INTERNA LIGA-------------------------------------------
+//------------------------------------IRRIGACAO 01 HORA-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoInternaLiga(valor) {
-  ajusVentilacaoInternaLigaElement.innerText = valor;
+function atualizarValorElementoIrrigacao01Hora(valor) {
+  ajusIrrigacao01HoraElement.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoInternaLiga(valor) {
-  ajusVentilacaoInternaLigaInputElement.value = valor;
+function atualizarValorInputIrrigacao01Hora(valor) {
+  ajusIrrigacao01HoraInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath08.on('value', snap => {
-  var valor = snap.val().ventilacaoInternaAjusteLiga;
+  var valor = snap.val().irrigacaoAjusteHora;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoInternaLiga(valor);
+  atualizarValorElementoIrrigacao01Hora(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoInternaLiga(valor);
+ atualizarValorInputIrrigacao01Hora(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoInternaLigaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoInternaLigaInputElement.value;
+ajusIrrigacao01HoraInputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao01HoraInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath05.set({ ventilacaoInternaAjusteLiga: novoValor });
+  dbRefdbPath08.set({ irrigacaoAjusteHora: novoValor });
 });
-//------------------------------------VENTILACAO INTERNA DESLIGA-------------------------------------------
+
+//------------------------------------IRRIGACAO 01 SEGUNDOS-------------------------------------------
 // Função para atualizar o valor do elemento span
-function atualizarValorElementoVentilacaoInternaDesliga(valor) {
-  ajusVentilacaoInternaDesligaElement.innerText = valor;
+function atualizarValorElementoIrrigacao01(valor) {
+  ajusIrrigacao01Element.innerText = valor;
 }
 
 // Função para atualizar o valor do input
-function atualizarValorInputVentilacaoInternaDesliga(valor) {
-  ajusVentilacaoInternaDesligaInputElement.value = valor;
+function atualizarValorInputIrrigacao01(valor) {
+  ajusIrrigacao01InputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath05.on('value', snap => {
+  var valor = snap.val().irrigacaoAjuste;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao01(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao01(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao01InputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao01InputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath05.set({ irrigacaoAjuste: novoValor });
+});
+
+
+//------------------------------------IRRIGACAO 02 HORA-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao02Hora(valor) {
+  ajusIrrigacao02HoraElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao02Hora(valor) {
+  ajusIrrigacao02HoraInputElement.value = valor;
 }
 
 // Adicionar um listener para 'value' no banco de dados
 dbRefdbPath09.on('value', snap => {
-  var valor = snap.val().ventilacaoInternaAjusteDesliga;
+  var valor = snap.val().irrigacaoAjusteHora02;
   // Atualizar o valor do elemento span
-  atualizarValorElementoVentilacaoInternaDesliga(valor);
+  atualizarValorElementoIrrigacao02Hora(valor);
   // Atualizar o valor do input
-  atualizarValorInputVentilacaoInternaDesliga(valor);
+ atualizarValorInputIrrigacao02Hora(valor);
 });
 
 // Adicionar um listener para mudanças no input range
-ajusVentilacaoInternaDesligaInputElement.addEventListener('input', function() {
-  var novoValor = ajusVentilacaoInternaDesligaInputElement.value;
+ajusIrrigacao02HoraInputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao02HoraInputElement.value;
   // Atualizar o valor no banco de dados quando o input range é alterado
-  dbRefdbPath09.set({ ventilacaoInternaAjusteDesliga: novoValor });
+  dbRefdbPath09.set({ irrigacaoAjusteHora02: novoValor });
+});
+
+//------------------------------------IRRIGACAO 02 SEGUNDOS-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao02(valor) {
+  ajusIrrigacao02Element.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao02(valor) {
+  ajusIrrigacao02InputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath10.on('value', snap => {
+  var valor = snap.val().irrigacaoAjuste02;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao02(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao02(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao02InputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao02InputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath10.set({ irrigacaoAjuste02: novoValor });
+});
+
+//------------------------------------IRRIGACAO 03 HORA-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao03Hora(valor) {
+  ajusIrrigacao03HoraElement.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao03Hora(valor) {
+  ajusIrrigacao03HoraInputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath11.on('value', snap => {
+  var valor = snap.val().irrigacaoAjusteHora03;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao03Hora(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao03Hora(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao03HoraInputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao03HoraInputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath11.set({ irrigacaoAjusteHora03: novoValor });
+});
+
+//------------------------------------IRRIGACAO 03 SEGUNDOS-------------------------------------------
+// Função para atualizar o valor do elemento span
+function atualizarValorElementoIrrigacao03(valor) {
+  ajusIrrigacao03Element.innerText = valor;
+}
+
+// Função para atualizar o valor do input
+function atualizarValorInputIrrigacao03(valor) {
+  ajusIrrigacao03InputElement.value = valor;
+}
+
+// Adicionar um listener para 'value' no banco de dados
+dbRefdbPath12.on('value', snap => {
+  var valor = snap.val().irrigacaoAjuste03;
+  // Atualizar o valor do elemento span
+  atualizarValorElementoIrrigacao03(valor);
+  // Atualizar o valor do input
+ atualizarValorInputIrrigacao03(valor);
+});
+
+// Adicionar um listener para mudanças no input range
+ajusIrrigacao03InputElement.addEventListener('input', function() {
+  var novoValor = ajusIrrigacao03InputElement.value;
+  // Atualizar o valor no banco de dados quando o input range é alterado
+  dbRefdbPath12.set({ irrigacaoAjuste03: novoValor });
 });
 
 //---------------------------LOGICA CADEADO------------------------------------------------------
@@ -574,12 +699,12 @@ function updateChart() {
     chartT.series[2].addPoint([x, ledStateIluminacao], true, false, true);
   }
 
-  if (ledStateVentilacaoExterna !== null) {
-    chartT.series[3].addPoint([x, ledStateVentilacaoExterna], true, false, true);
+  if (ledStateVentilacao !== null) {
+    chartT.series[3].addPoint([x, ledStateVentilacao], true, false, true);
   }
 
-  if (ledStateVentilacaoInterna !== null) {
-    chartT.series[4].addPoint([x, ledStateVentilacaoInterna], true, false, true);
+  if (ledStateIrrigacao !== null) {
+    chartT.series[4].addPoint([x, ledStateIrrigacao], true, false, true);
   }
 
   // Atualiza o gráfico de umidade
@@ -595,12 +720,12 @@ function updateChart() {
     chartH.series[2].addPoint([x, ledStateIluminacao], true, false, true);
   }
 
-  if (ledStateVentilacaoExterna !== null) {
-    chartH.series[3].addPoint([x, ledStateVentilacaoExterna], true, false, true);
+  if (ledStateVentilacao !== null) {
+    chartH.series[3].addPoint([x, ledStateVentilacao], true, false, true);
   }
 
-  if (ledStateVentilacaoInterna !== null) {
-    chartH.series[4].addPoint([x, ledStateVentilacaoInterna], true, false, true);
+  if (ledStateIrrigacao !== null) {
+    chartH.series[4].addPoint([x, ledStateIrrigacao], true, false, true);
   }
 }
 
@@ -648,12 +773,12 @@ dbRefStatusLedIluminacao.on('value', snap => {
 });
 
 // Atualiza os estados dos LEDs de Ventilação
-dbRefStatusLedVentilacaoExterna.on('value', snap => {
-  ledStateVentilacaoExterna = snap.val();
+dbRefStatusLedVentilacao.on('value', snap => {
+  ledStateVentilacao = snap.val();
 
   // Atualiza o estado do LED no DOM
-  const ledIndicator = document.getElementById("led-indicator-ventilacao-externa");
-  if (ledStateVentilacaoExterna === 1) {
+  const ledIndicator = document.getElementById("led-indicator-ventilacao");
+  if (ledStateVentilacao === 1) {
     ledIndicator.classList.add('on');
     ledIndicator.classList.remove('off');
   } else {
@@ -664,47 +789,45 @@ dbRefStatusLedVentilacaoExterna.on('value', snap => {
   updateChart(); // Chama a função para atualizar os gráficos
 });
 
-// Atualiza os estados dos LEDs de Ventilação
-dbRefStatusLedVentilacaoInterna.on('value', snap => {
-  ledStateVentilacaoInterna = snap.val();
+// Atualiza os estados dos LEDs de Irrigação
+dbRefStatusLedIrrigacao.on('value', snap => {
+  ledStateIrrigacao = snap.val();
 
   // Atualiza o estado do LED no DOM
-  const ledIndicator = document.getElementById("led-indicator-ventilacao-interna");
-  if (ledStateVentilacaoInterna === 1) {
+  const ledIndicator = document.getElementById("led-indicator-irrigacao");
+  if (ledStateIrrigacao === 1) {
     ledIndicator.classList.add('on');
     ledIndicator.classList.remove('off');
   } else {
     ledIndicator.classList.add('off');
     ledIndicator.classList.remove('on');
   }
-
   updateChart(); // Chama a função para atualizar os gráficos
 });
-
 
 
 //---------------------------CÓDIGO DE ERRO--------------------------------
 
-  let lastCodigoErro = null; // Variável para armazenar o último código de erro
+let lastCodigoErro = null; // Variável para armazenar o último código de erro
 
 // Função para adicionar uma nova notificação
-  function addNotification(message, type) {
-    const timestamp = new Date();
-    const timeString = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+function addNotification(message, type) {
+  const timestamp = new Date();
+  const timeString = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-    // Criar o elemento de notificação
-    const notification = document.createElement('p');
-    notification.className = `notification ${type}`;
-    notification.textContent = `${timeString} - ${message}`;
+  // Criar o elemento de notificação
+  const notification = document.createElement('p');
+  notification.className = `notification ${type}`;
+  notification.textContent = `${timeString} - ${message}`;
 
-    // Adicionar a nova notificação no topo do contêiner
-    notificationsContainer.prepend(notification);
+  // Adicionar a nova notificação no topo do contêiner
+  notificationsContainer.prepend(notification);
 
-    // Limitar o número de notificações a 10
-    if (notificationsContainer.childElementCount > 10) {
-      notificationsContainer.removeChild(notificationsContainer.lastChild);
-    }
+  // Limitar o número de notificações a 10
+  if (notificationsContainer.childElementCount > 10) {
+    notificationsContainer.removeChild(notificationsContainer.lastChild);
   }
+}
 
 // Monitorar mudanças no codigoErro no Firebase
 dbRefCodigoErro.on('value', snap => {
@@ -724,7 +847,7 @@ dbRefCodigoErro.on('value', snap => {
     if (codigoErroInt >= 0 && codigoErroInt < 10) {
       switch (codigoErroInt) {
           case 0:
-              message = "O sistema iniciou, conectou com a rede wifi e com o banco de dados com sucesso. Configure ou verifique suas configurações.";
+              message = "O sistema iniciou, conectou com a rede wifi e com o banco de dados com sucesso";
               break;
           case 1:
               message = "O sistema de ventilação foi acionado, ar fresco para suas plantas.";
@@ -757,80 +880,74 @@ dbRefCodigoErro.on('value', snap => {
               message = "A hora foi atualizada com sucesso!";
               break;
           case 10:
-              message = "------------";
-              break;
-          case 11:
-              message = "-----------";
+              message = "O ";
               break;
       }
       type = 'green';
-  } else if (codigoErroInt >= 100 && codigoErroInt < 199) {
+  } else if (codigoErroInt >= 10 && codigoErroInt < 20) {
       switch (codigoErroInt) {
           case 100:
-              message = "Reset caused by power-on event.";
+              message = "Após 3 tentativas não consegui atualizar a data e hora do sistema com o servidor, mais tarde tentaremos novamente.";
               break;
           case 101:
-              message = "Reset caused by external pin (not applicable for ESP32).";
+              message = "Atenção: Algo piscou mais do que devia, e não foram as estrelas.";
               break;
           case 102:
-              message = "Reset caused by software using esp_restart.";
+              message = "Verifique o sistema! Não é uma pane geral, mas vale a pena conferir.";
               break;
           case 103:
-              message = "Reset caused by exception/panic.";
+              message = "Atenção! Um parafuso parece estar meio solto.";
               break;
           case 104:
-              message = "Reset caused by interrupt watchdog.";
+              message = "Alerta: Algo quer chamar sua atenção, e não é a geladeira vazia.";
               break;
           case 105:
-              message = "Reset caused by task watchdog.";
+              message = "Verifique! Não é apocalíptico, mas pode ser estranho.";
               break;
           case 106:
-              message = "Reset caused by other watchdogs.";
+              message = "Atenção: Um grãozinho de areia apareceu na engrenagem.";
               break;
           case 107:
-              message = "Reset after exiting deep sleep mode.";
+              message = "Algo está fora de sintonia, mas não é a sua playlist.";
               break;
           case 108:
-              message = "Brownout reset (voltage drop).";
+              message = "Verifique o sistema, antes que ele peça café.";
               break;
           case 109:
-              message = "Reset over SDIO.";
+              message = "Atenção! Pode ser só um soluço tecnológico.";
               break;
-          case 110:
-                message = "Não foi possível sincronizar a hora após várias tentativas, mais tarde será tentado novamente.";
-                break;
       }
       type = 'yellow';
-  } else if (codigoErroInt >= 200 && codigoErroInt < 299) {
+  } else if (codigoErroInt >= 20 && codigoErroInt < 30) {
       switch (codigoErroInt) {
-          case 200:
-              message = "Sensor interno em falha. Por questão de segurança todo sistema de temperatura e umidade foi bloqueado.";
+          case 20:
+              message = "Alerta vermelho! É como esquecer a pizza no forno por muito tempo... só que pior!";
               break;
-          case 201:
-              message = "Sensor externo em falha.";
+          case 21:
+              message = "Erro crítico! O sistema quer atenção e não vai aceitar um não como resposta.";
               break;
-          case 202:
+          case 22:
               message = "Alerta! A situação é mais urgente que aquele email de spam.";
               break;
-          case 203:
+          case 23:
               message = "Erro! Algo deu ruim, e não foi só a previsão do tempo.";
               break;
-          case 204:
+          case 24:
               message = "Alerta! O sistema quer que você faça algo, tipo agora!";
               break;
-          case 205:
+          case 25:
               message = "Erro crítico! Melhor resolver antes que fique pior que sua última reunião.";
               break;
-          case 206:
+          case 26:
               message = "Ação necessária! Isso aqui tá mais tenso que filme de terror.";
               break;
-          case 207:
+          case 27:
               message = "Erro! Melhor consertar antes que vire novela mexicana.";
               break;
-          case 208:
+          case 28:
               message = "Alerta crítico! O sistema está mais temperamental que segunda-feira.";
               break;
-          case 209:
+          case 29:
               message = "Erro! Hora de entrar em ação, tipo super-herói, mas sem a capa.";
               break;
       }
