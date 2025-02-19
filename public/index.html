@@ -80,10 +80,8 @@
       <div class="card notifications-card">
         <h2><i class="fa-solid fa-bell"></i> Notificações <i class="fa-solid fa-bell"></i></h2>
         <div id="notifications-container"></div>
-
       </div>
-      
-
+    
       <!-- CARD TEMPERATURA -->
       <div class="card">
         <i class="fa-solid fa-lock lock-icon" id="lock-temperatura"></i>
@@ -116,19 +114,6 @@
           <input type="range" min="-10" max="10" step="1" class="temp-slider" id="temp-slider-umidade-offset" disabled>
       </div>
 
-      <!-- CARD VENTILAÇÃO -->
-      <div class="card">
-          <i class="fa-solid fa-lock lock-icon" id="lock-ventilacao"></i>
-          <h1><i class="fa-solid fa-wind" style="color: #000000;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #000000;"></i></h1>
-          <label> <span class="led" id="led-indicator-ventilacao"></span></label>
-          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao"></span></h2>          
-          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoAdjustLiga"></span> s</span></p>
-          <input type="range" min="0" max="300" value="16" class="temp-slider" id="temp-slider-ventilacao-liga" disabled>
-          <p1></p1>
-          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoAdjustDesliga"></span> m</span></p>
-          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-desliga" disabled>
-      </div>
-
       <!-- CARD DE ILUMINAÇÃO -->
       <div class="card">
         <i class="fa-solid fa-lock lock-icon" id="lock-iluminacao"></i>
@@ -145,31 +130,35 @@
         <input class="temp-slider" type="range" id="desligarMin" min="0" max="59" step="1" disabled>
       </div>
 
-      <!-- CARD IRRIGAÇÃO -->
+      <!-- CARD VENTILAÇÃO EXTERNA -->
       <div class="card">
-          <i class="fa-solid fa-lock lock-icon" id="lock-irrigacao"></i>
-          <h1><i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i> Irrigação <i class="fa-solid fa-cloud-showers-heavy" style="color: #000000;"></i></h1>
-          <label> <span class="led" id="led-indicator-irrigacao"></span></label>
-          <h2>Nível: <span id="horas-ligado-ventilacao"></span>Alto</h2>
-          <p>Acionamento 01</p>
-          <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao"></span><span> h</span></p>
-          <input class="temp-slider" type="range" id="ligar-irrigacao" min="0" max="23" step="1" disabled>
-          <p><span class="reading01"><span><p1 class="fa-solid fa-clock"="fa-solid fa-plug-circle-bolt"></p1> </span><span id="irrigacaoAdjust"></span> s</span></p>
-          <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao" disabled>
-          <p>Acionamento 02</p>
-          <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1>  </span><span id="ligar-value-irrigacao02"></span><span> h</span></p>
-          <input class="temp-slider" type="range" id="ligar-irrigacao02" min="0" max="23" step="1" disabled>
-          <p><span class="reading01"><span><p1 class="fa-solid fa-clock"></p1> </span><span id="irrigacaoAdjust02"></span> s</span></p>
-          <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao02" disabled>
-          <p>Acionamento 03</p>
-          <p><span><p1 class="fa-solid fa-plug-circle-bolt"></p1> </span><span id="ligar-value-irrigacao03"></span><span> h</span></p>
-          <input class="temp-slider" type="range" id="ligar-irrigacao03" min="0" max="23" step="1" disabled>
-          <p><span class="reading01"><span><p1 class="fa-solid fa-clock"></p1> </span><span id="irrigacaoAdjust03"></span> s</span></p>
-          <input type="range" min="0" step="10" max="600" value="16" class="temp-slider" id="temp-slider-irrigacao03" disabled>
+          <i class="fa-solid fa-lock lock-icon" id="lock-ventilacao-externa"></i>
+          <h1><i class="fa-solid fa-wind" style="color: #000000;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #000000;"></i></h1>
+          <h1>Interna</h1>
+          <label> <span class="led" id="led-indicator-ventilacao-externa"></span></label>
+          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao-externa"></span></h2>          
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoExternaAdjustLiga"></span> s</span></p>
+          <input type="range" min="0" max="300" value="16" class="temp-slider" id="temp-slider-ventilacao-externa-liga" disabled>
+          <p1></p1>
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoExternaAdjustDesliga"></span> m</span></p>
+          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-externa-desliga" disabled>
       </div>
-  </div>
-     
-    <!--CHARTS-->
+
+      <!-- CARD VENTILACAO INTERNA -->
+      <div class="card">
+          <i class="fa-solid fa-lock lock-icon" id="lock-ventilacao-interna"></i>
+          <h1><i class="fa-solid fa-wind" style="color: #000000;"></i> Ventilação <i class="fa-solid fa-wind" style="color: #000000;"></i></h1>
+          <h1>Externa</h1>
+          <label> <span class="led" id="led-indicator-ventilacao-interna"></span></label>
+          <h2>Ciclo/dia: <span id="horas-ligado-ventilacao-interna"></span></h2>          
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-bolt"></p1> <span id="ventilacaoInternaAdjustLiga"></span> s</span></p>
+          <input type="range" min="0" max="300" value="16" class="temp-slider" id="temp-slider-ventilacao-interna-liga" disabled>
+          <p1></p1>
+          <p><span class="reading01"><p1 class="fa-solid fa-plug-circle-xmark"></p1> <span id="ventilacaoInternaAdjustDesliga"></span> m</span></p>
+          <input type="range" min="0" max="59" value="16" class="temp-slider" id="temp-slider-ventilacao-interna-desliga" disabled>
+      </div>
+
+          <!--CHARTS-->
   <!--  <div id="charts-div" style="display:none"> -->
     <div id="charts-div" >
       <!--SET NUMBER OF READINGS INPUT FIELD // DEFINIR O NUMERO DE LEITURAS NO CAMPO DE ENTRADA  --> 
@@ -214,7 +203,6 @@
   <script src="./scripts/temperatura.js"></script>
   <script src="./scripts/umidade.js"></script>
   <script src="./scripts/ventilacao.js"></script>
-  <script src="./scripts/Irrigacao.js"></script>
   <script src="./scripts/iluminacao.js"></script>
   </body>
 </html>
