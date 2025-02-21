@@ -29,12 +29,12 @@ function createTemperatureChart() {
         yAxis: 1 // Usando um eixo Y secundário para o LED
       },
       {
-        name: 'Ventilação ext.',
+        name: 'Ventilação',
         color: 'green',
         yAxis: 1 // Usando o mesmo eixo Y secundário
       },
       {
-        name: 'Ventilação int.',
+        name: 'Irrigação',
         color: 'purple',
         yAxis: 1 // Usando o mesmo eixo Y secundário
       }
@@ -145,13 +145,13 @@ function createHumidityChart() {
         data: [] // Inicializa com um array vazio
       },
       {
-        name: 'Ventilação ext.',
+        name: 'Ventilação',
         color: 'green',
         yAxis: 1, // Usando o mesmo eixo Y secundário
         data: [] // Inicializa com um array vazio
       },
       {
-        name: 'Ventilação int.',
+        name: 'Irrigação',
         color: 'purple',
         yAxis: 1, // Usando o mesmo eixo Y secundário
         data: [] // Inicializa com um array vazio
