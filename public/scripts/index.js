@@ -834,170 +834,155 @@ dbRefStatusLedIrrigacao.on('value', snap => {
     });
 
 
+
 //---------------------------CÓDIGO DE ERRO--------------------------------
 
-  let lastCodigoErro = null; // Variável para armazenar o último código de erro
+let lastCodigoErro = null; // Variável para armazenar o último código de erro
+let modoManual = true; // Alterna entre modo manual e automático
 
 // Função para adicionar uma nova notificação
-  function addNotification(message, type) {
-    const timestamp = new Date();
-    const timeString = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+function addNotification(message, type, customTime = null) {
+  const timestamp = customTime ? new Date(customTime) : new Date();
+  const timeString = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-    // Criar o elemento de notificação
-    const notification = document.createElement('p');
-    notification.className = `notification ${type}`;
-    notification.textContent = `${timeString} - ${message}`;
+  // Criar o elemento de notificação
+  const notification = document.createElement('p');
+  notification.className = `notification ${type}`;
+  notification.textContent = `${timeString} - ${message}`;
 
-    // Adicionar a nova notificação no topo do contêiner
-    notificationsContainer.prepend(notification);
+  // Adicionar a nova notificação no topo do contêiner
+  notificationsContainer.prepend(notification);
 
-    // Limitar o número de notificações a 10
-    if (notificationsContainer.childElementCount > 10) {
-      notificationsContainer.removeChild(notificationsContainer.lastChild);
-    }
+  // Limitar o número de notificações a 10
+  if (notificationsContainer.childElementCount > 10) {
+    notificationsContainer.removeChild(notificationsContainer.lastChild);
   }
+}
 
-// Monitorar mudanças no codigoErro no Firebase
-dbRefCodigoErro.on('value', snap => {
-  const codigoErroInt = parseInt(snap.val(), 10);
+// Alternar entre modo manual e automático
+function toggleModo() {
+  modoManual = !modoManual;
+  const status = modoManual ? "Modo Manual Ativado" : "Modo Automático Ativado";
+  console.log(status);
+}
 
-  // Verificar se o novo código de erro é diferente do último
-  if (codigoErroInt !== lastCodigoErro) {
-    // Atualizar o último código de erro
-    lastCodigoErro = codigoErroInt;
+// Função para gerar notificações manuais
+function gerarNotificacaoManual(codigoErroInt, customTime = null) {
+  let message = '';
+  let type = '';
 
-    // Determinar a mensagem e o tipo de notificação com base no codigoErroInt
-    let message = '';
-    let type = '';
-
-    //---------------------------------MENSAGENS DE NOTIFICAÇÃO-----------------------------
-
-    if (codigoErroInt >= 0 && codigoErroInt < 10) {
-      switch (codigoErroInt) {
-          case 0:
-              message = "O sistema iniciou, conectou com a rede wifi e com o banco de dados com sucesso. Configure ou verifique suas configurações.";
-              break;
-          case 1:
-              message = "O sistema de ventilação foi acionado, ar fresco para suas plantas.";
-              break;
-          case 2:
-              message = "O sistema de ventilação foi desligado";
-              break;
-          case 3:
-              message = "O sistema de iluminação foi acionado, faça-se a luz!";
-              break;
-          case 4:
-              message = "O sistema de iluminação foi desligado, a escuridão toma conta do ambiente";
-              break;
-          case 5:
-              message = "O sistema desumidificador foi acionado, logo sua umidade será equalizada.";
-              break;
-          case 6:
-              message = "O sistema desumidificador foi desligado, a umidade se encontra desntro da faixa estipulada.";
-              break;
-          case 7:
-              message = "O sistema de aquecimento foi acionado, parece que esfriou por aqui.";
-              break;
-          case 8:
-              message = "O sistema de aquecimento foi desligado, a temperatura está ok.";
-              break;
-          case 9:
-              message = "É hora de atualizar a a data e hora do sistema com o servidor";
-              break;
-          case 10:
-              message = "A hora foi atualizada com sucesso!";
-              break;
-          case 11:
-              message = "Sincronizando com o servidor NTP...";
-              break;
-      }
-      type = 'green';
+  if (codigoErroInt >= 0 && codigoErroInt < 99) {
+    switch (codigoErroInt) {
+      case 0:
+        message = "O sistema iniciou com sucesso.";
+        break;
+      case 1:
+        message = "O sistema de ventilação foi acionado.";
+        break;
+      case 3:
+        message = "O sistema de iluminação foi ligado.";
+        break;
+      case 4:
+        message = "O sistema de iluminação foi desligado.";
+        break;
+      case 5:
+        message = "Sistema iniciado com sucesso. Vamos criar o ambiente perfeito para suas plantas! 🌿";
+        break;
+      case 6:
+        message = " Iluminação ligada. As plantas estão recebendo a luz ideal para crescerem fortes. 💡";
+        break;
+      case 7:
+        message =  "Ventilação interna ativada. Garantindo ar fresco para manter o ambiente saudável. 🌬️";
+        break;
+      case 9:
+        message = "Umidade equilibrada. O ambiente está estável para o melhor desenvolvimento das plantas. ✅";
+        break;
+      case 10:
+        message = "Lembrete: É hora de verificar e limpar os filtros de ar para manter a ventilação eficiente. 🧹";
+        break;
+      case 11:
+        message = "Sistema de aquecimento acionado. Ajustando a temperatura para o conforto ideal das plantas. 🌡️";
+        break;
+      case 12:
+        message = "Dica do dia: Mantenha a umidade entre 50% e 70% para um crescimento saudável. 🌱";
+        break;
+      case 13:
+        message = "Verificação concluída. Todos os sistemas estão funcionando perfeitamente! 🚀";
+        break;
+      case 14:
+        message = "Sugestão: Adicione nutrientes no próximo ciclo de irrigação para potencializar o crescimento. 🌾"
+        break;
+    }
+    type = 'green';
   } else if (codigoErroInt >= 100 && codigoErroInt < 199) {
-      switch (codigoErroInt) {
-          case 100:
-              message = "Reset caused by power-on event.";
-              break;
-          case 101:
-              message = "Reset caused by external pin (not applicable for ESP32).";
-              break;
-          case 102:
-              message = "Reset caused by software using esp_restart.";
-              break;
-          case 103:
-              message = "Reset caused by exception/panic.";
-              break;
-          case 104:
-              message = "Reset caused by interrupt watchdog.";
-              break;
-          case 105:
-              message = "Reset caused by task watchdog.";
-              break;
-          case 106:
-              message = "Reset caused by other watchdogs.";
-              break;
-          case 107:
-              message = "Reset after exiting deep sleep mode.";
-              break;
-          case 108:
-              message = "Brownout reset (voltage drop).";
-              break;
-          case 109:
-              message = "Reset over SDIO.";
-              break;
-          case 110:
-              message = "Não foi possível sincronizar a hora após várias tentativas, mais tarde será tentado novamente.";
-                break;
-          case 111:
-              message = "Erro: Não foi possível obter a hora local.";
-                break;
-          case 112:
-              message = "Falha ao obter a hora, tentando novamente...";
-                break;
-      }
-      type = 'yellow';
+    if (codigoErroInt === 110) message = "Não foi possível sincronizar a hora após várias tentativas.";
+    switch (codigoErroInt) {
+    case 108:
+      message = "Umidade abaixo do ideal. Ativando o umidificador para otimizar o crescimento. 💧";
+      break;
+    }
+    type = 'yellow';
   } else if (codigoErroInt >= 200 && codigoErroInt < 299) {
-      switch (codigoErroInt) {
-          case 200:
-              message = "Sensor interno em falha. Por questão de segurança todo sistema de temperatura e umidade foi bloqueado.";
-              break;
-          case 201:
-              message = "Sensor externo em falha.";
-              break;
-          case 202:
-              message = "Alerta! A situação é mais urgente que aquele email de spam.";
-              break;
-          case 203:
-              message = "Erro! Algo deu ruim, e não foi só a previsão do tempo.";
-              break;
-          case 204:
-              message = "Alerta! O sistema quer que você faça algo, tipo agora!";
-              break;
-          case 205:
-              message = "Erro crítico! Melhor resolver antes que fique pior que sua última reunião.";
-              break;
-          case 206:
-              message = "Ação necessária! Isso aqui tá mais tenso que filme de terror.";
-              break;
-          case 207:
-              message = "Erro! Melhor consertar antes que vire novela mexicana.";
-              break;
-          case 208:
-              message = "Alerta crítico! O sistema está mais temperamental que segunda-feira.";
-              break;
-          case 209:
-              message = "Erro! Hora de entrar em ação, tipo super-herói, mas sem a capa.";
-              break;
-      }
-      type = 'red';
+    switch (codigoErroInt) {
+      case 200:
+        message = "Sensor interno em falha.";
+        break;
+      case 205:
+        message = "Erro crítico! Verifique o sistema.";
+        break;
+    }
+    type = 'red';
   }
-  
+  if (message) {
+    addNotification(message, type, customTime);
+  }
+}
 
-    // Adicionar notificação apenas se a mensagem foi definida
-    if (message) {
-      addNotification(message, type);
+// Monitoramento Automático do Firebase
+dbRefCodigoErro.on('value', snap => {
+  if (!modoManual) {
+    const codigoErroInt = parseInt(snap.val(), 10);
+    if (codigoErroInt !== lastCodigoErro) {
+      lastCodigoErro = codigoErroInt;
+      gerarNotificacaoManual(codigoErroInt);
     }
   }
-});     
+});
+
+// ----------------------- MODO MANUAL ---------------------------
+// Escreva suas notificações aqui quando o modoManual estiver true
+if (modoManual) {
+  gerarNotificacaoManual(5, '2024-02-21T08:00:00');  
+  // Sistema iniciado com sucesso. Vamos criar o ambiente perfeito para suas plantas! 🌿
+
+  gerarNotificacaoManual(6, '2024-02-21T08:05:00');  
+  // Iluminação ligada. As plantas estão recebendo a luz ideal para crescerem fortes. 💡
+
+  gerarNotificacaoManual(7, '2024-02-21T08:10:00');  
+  // Ventilação interna ativada. Garantindo ar fresco para manter o ambiente saudável. 🌬️
+
+  gerarNotificacaoManual(108, '2024-02-21T08:21:00');  
+  // Umidade abaixo do ideal. Ativando o umidificador para otimizar o crescimento. 💧
+
+  gerarNotificacaoManual(9, '2024-02-21T08:28:00');  
+  // Umidade equilibrada. O ambiente está estável para o melhor desenvolvimento das plantas. ✅
+
+  gerarNotificacaoManual(10, '2024-02-21T08:40:00');  
+  // Lembrete: É hora de verificar e limpar os filtros de ar para manter a ventilação eficiente. 🧹
+
+  gerarNotificacaoManual(11, '2024-02-21T08:49:00');  
+  // Sistema de aquecimento acionado. Ajustando a temperatura para o conforto ideal das plantas. 🌡️
+
+  gerarNotificacaoManual(12, '2024-02-21T09:02:00');  
+  // Dica do dia: Mantenha a umidade entre 60% e 70% para um crescimento saudável. 🌱
+
+  gerarNotificacaoManual(13, '2024-02-21T10:00:00');  
+  // Verificação concluída. Todos os sistemas estão funcionando perfeitamente! 🚀
+  gerarNotificacaoManual(14, '2024-02-21T10:30:00');  
+ 
+}
+
+
 
   // if user is logged out
   } else{
